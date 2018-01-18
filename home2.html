@@ -1,0 +1,515 @@
+<div data-page="home" class="page">
+    <div class="navbar">
+        <div class="navbar-inner">
+            <!--            <div class="left"><a href="#" class="open-panel link icon-only"><i class="material-icons">menu</i></a></div>-->
+            <div class="center">Arubait</div>
+            <div class="right">
+                <a href="" class="link icon-only" onclick="cari()"><i class="material-icons" >search</i></a>
+                <a href="notification.html" class="link icon-only"><i class="material-icons">notifications</i>
+<!--                    <span class="badge" style="color:#5a5a5a; position: absolute;border-radius: 50%; width: 20px; height: 20px; line-height: 20px; text-align: center; left: 20px;top: 13px; background: #ffc400;">5</span>-->
+                </a>
+                <a href="#" class="link icon-only logout"><i class="material-icons">power_settings_new</i></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="speed-dial">
+        <a href="#" class="floating-button">
+            <i class="icon icon-plus"></i>
+            <i class="icon icon-close"></i>
+        </a>
+        <div class="speed-dial-buttons">
+            <a href="new-advert.html"><i class="material-icons">playlist_add</i></a>
+        </div>
+    </div>
+    <form id="cari" data-search-list=".search-here" data-search-in=".item-title" class="searchbar searchbar-init">
+        <div class="searchbar-input">
+            <input type="search" placeholder="Search" style="color: white !important;">
+            <a href="#" class="searchbar-clear" onclick="pangkah()"></a>
+        </div>
+    </form>
+    <div class="toolbar tabbar">
+        <div class="toolbar-inner ">
+            <a href="#tab1" class="tab-link"><i class="icon-tab material-icons">home</i><span class="tabbar-label">Home</span></a>
+            <a href="#tab2" class="tab-link"><i class="icon-tab material-icons">assignment_ind</i><span class="tabbar-label">Worker</span></a>
+            <a href="#tab3" class="tab-link active"><i class="icon-tab material-icons">person_pin</i><span class="tabbar-label">Work</span></a>
+            <a href="#tab4" class="tab-link"><i class="icon-tab material-icons">more_vert</i><span class="tabbar-label">More</span></a>
+            <span class="tab-link-highlight" style="width: 25% !important; transform: translate3d(200%, 0px, 0px);"></span>
+        </div>
+    </div>
+    <div class="tabs-swipeable-wrap swiper-container swiper-container-horizontal swiper-container-android">
+        <div class="tabs swiper-wrapper" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px);">
+            <div id="tab1" class="page-content tab swiper-slide" style="width: 360px;">
+                <div class="content-block page-home">
+                    <!--
+                    <div class="row no-gutter">
+                        <div data-pagination=".swiper-pagination" data-paginationhide="true" class="swiper-container swiper-init ks-demo-slider swiper-container-horizontal swiper-container-android">
+                            <div class="swiper-pagination swiper-pagination-bullets"><span class="swiper-pagination-bullet swiper-pagination-bullet-active"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span></div>
+                            <div class="swiper-wrapper">
+                                <div style="width: 100%; heigth: 30vmin; " class="swiper-slide swiper-slide-active">
+                                    <img src="img/Banner.jpg" width="100%">
+                                </div>
+                                <div style="width: 100%; heigth: 30vmin; " class="swiper-slide swiper-slide-active">
+                                    <img src="img/Banner2.jpg" width="100%">
+                                </div>
+                                <div style="width: 100%; heigth: 30vmin; " class="swiper-slide swiper-slide-active">
+                                    <img src="img/Banner.jpg" width="100%">
+                                </div>
+                                <div style="width: 100%; heigth: 30vmin; " class="swiper-slide swiper-slide-active">
+                                    <img src="img/Banner2.jpg" width="100%">
+                                </div>
+                                <div style="width: 100%; heigth: 30vmin; " class="swiper-slide swiper-slide-active">
+                                    <img src="img/Banner.jpg" width="100%">
+                                </div>
+                                <div style="width: 100%; heigth: 30vmin; " class="swiper-slide swiper-slide-active">
+                                    <img src="img/Banner2.jpg" width="100%">
+                                </div>
+                                <div style="width: 100%; heigth: 30vmin; " class="swiper-slide swiper-slide-active">
+                                    <img src="img/Banner.jpg" width="100%">
+                                </div>
+                                <div style="width: 100%; heigth: 30vmin; " class="swiper-slide swiper-slide-active">
+                                    <img src="img/Banner2.jpg" width="100%">
+                                </div>
+                                <div style="width: 100%; heigth: 30vmin; " class="swiper-slide swiper-slide-active">
+                                    <img src="img/Banner.jpg" width="100%">
+                                </div>
+                                <div style="width: 100%; heigth: 30vmin; " class="swiper-slide swiper-slide-active">
+                                    <img src="img/Banner2.jpg" width="100%">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+-->
+                    <div class="row no-gutter">
+                        <div class="col-100">
+                            <p>Category</p>
+                        </div>
+                    </div>
+                    <div class="row no-gutter">
+                        <div class="col-50">
+                            <div class="card ks-facebook-card">
+                                <a href="list_work.html">
+                                    <div class="card-content">
+                                        <div class="card-content-inner">
+                                            <img src="img/Restoran.jpg" width="100%">
+                                            <p class="color-gray">Hotel/Restaurant</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-50">
+                            <div class="card ks-facebook-card">
+                                <a href="list_work.html">
+                                    <div class="card-content">
+                                        <div class="card-content-inner">
+                                            <img src="img/MediaArt.jpg" width="100%">
+                                            <p class="color-gray">Arts/Media</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-50">
+                            <div class="card ks-facebook-card">
+                                <a href="list_work.html">
+                                    <div class="card-content">
+                                        <div class="card-content-inner">
+                                            <img src="img/gomen.jpg" width="100%">
+                                            <p class="color-gray">Government</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-50">
+                            <div class="card ks-facebook-card">
+                                <a href="list_work.html">
+                                    <div class="card-content">
+                                        <div class="card-content-inner">
+                                            <img src="img/jambatan.jpg" width="100%">
+                                            <p class="color-gray">Architecture & Design</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-50">
+                            <div class="card ks-facebook-card">
+                                <a href="list_work.html">
+                                    <div class="card-content">
+                                        <div class="card-content-inner">
+                                            <img src="img/technical.jpg" width="100%">
+                                            <p class="color-gray">Technician</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-50">
+                            <div class="card ks-facebook-card">
+                                <a href="list_work.html">
+                                    <div class="card-content">
+                                        <div class="card-content-inner">
+                                            <img src="img/sales.jpg" width="100%">
+                                            <p class="color-gray">Sales & Marketing</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-50">
+                            <div class="card ks-facebook-card">
+                                <a href="list_work.html">
+                                    <div class="card-content">
+                                        <div class="card-content-inner">
+                                            <img src="img/tourism.jpg" width="100%">
+                                            <p class="color-gray">Tourism</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-50">
+                            <div class="card ks-facebook-card">
+                                <a href="list_worker.html">
+                                    <div class="card-content">
+                                        <div class="card-content-inner">
+                                            <img src="img/MediaArt.jpg" width="100%">
+                                            <p class="color-gray">Arts/Media</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div id="tab2" class="page-content tab swiper-slide" style="width: 360px;">
+                <div class="content-block top-adjust">
+                    <div class="list-block accordion-list">
+                        <ul>
+                            <li class="accordion-item">
+                                <a href="#" class="item-link item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title-row">
+                                            <div class="item-title">Cashier</div>
+                                            <div class="item-after" style="margin-left: 0;">20 Dec 2016</div>
+                                        </div>
+                                        <div class="item-subtitle"><span class="badge" style="background: rgba(255, 255, 255, 0); border: 1px #e00472 solid; border-radius: 3px; color: #e00472;">new</span></div>
+
+                                    </div>
+                                </a>
+                                <div class="accordion-item-content" style="">
+                                    <div class="list-block">
+                                        <article>
+                                            <div class="card ks-card-header-pic">
+                                                <div class="card-footer">
+                                                    <div class="col-100" style="font-size: 3vmin;">
+                                                        <div class="row">
+                                                            <div class="col-100" style="text-align: left; font-weight: lighter;">Category</div>
+                                                            <div class="col-100" style="text-align: left;font-weight: bold;">Hotel and Restourant</div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-100" style="text-align: left; font-weight: lighter;">Description</div>
+                                                            <div class="col-100" style="text-align: left;font-weight: bold;">Put your work description here...</div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-100" style="text-align: left; margin-top: 10px;">
+                                                                <a href="#">
+                                                                    <i class="material-icons" style="color: grey;">edit</i>
+                                                                </a>
+                                                                <a href="#">
+                                                                    <i class="material-icons" style="color: #ff2c2c; margin-left: 10px;">delete</i>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="accordion-item">
+                                <a href="#" class="item-link item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title-row">
+                                            <div class="item-title">Cleaner</div>
+                                            <div class="item-after" style="margin-left: 0;">01 Nov 2016</div>
+                                        </div>
+                                        <div class="item-subtitle"><span class="badge" style="background: rgba(255, 255, 255, 0); border: 1px #ff2c2c solid; border-radius: 3px; color: #ff2c2c;">rejected</span></div>
+
+                                    </div>
+                                </a>
+                                <div class="accordion-item-content" style="">
+                                    <div class="list-block">
+                                        <article>
+                                            <div class="card ks-card-header-pic">
+                                                <div class="card-footer">
+                                                    <div class="col-100" style="font-size: 3vmin;">
+                                                        <div class="row">
+                                                            <div class="col-100" style="text-align: left; font-weight: lighter;">Category</div>
+                                                            <div class="col-100" style="text-align: left;font-weight: bold;">Hotel and Restourant</div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-100" style="text-align: left; font-weight: lighter;">Description</div>
+                                                            <div class="col-100" style="text-align: left;font-weight: bold;">Put your work description here...</div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-100" style="text-align: left; margin-top: 10px;">
+                                                                <a href="#">
+                                                                    <i class="material-icons" style="color: grey;">edit</i>
+                                                                </a>
+                                                                <a href="#">
+                                                                    <i class="material-icons" style="color: #ff2c2c; margin-left: 10px;">delete</i>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="accordion-item">
+                                <a href="#" class="item-link item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title-row">
+                                            <div class="item-title">Waiter</div>
+                                            <div class="item-after" style="margin-left: 0;">16 October 2016</div>
+                                        </div>
+                                        <div class="item-subtitle"><span class="badge" style="background: rgba(255, 255, 255, 0); border: 1px #00be5f solid; border-radius: 3px; color: #00be5f;">Accept</span></div>
+
+                                    </div>
+                                </a>
+                                <div class="accordion-item-content" style="">
+                                    <div class="list-block">
+                                        <article>
+                                            <div class="card ks-card-header-pic">
+                                                <div class="card-footer">
+                                                    <div class="col-100" style="font-size: 3vmin;">
+                                                        <div class="row">
+                                                            <div class="col-100" style="text-align: left; font-weight: lighter;">Category</div>
+                                                            <div class="col-100" style="text-align: left;font-weight: bold;">Hotel and Restourant</div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-100" style="text-align: left; font-weight: lighter;">Description</div>
+                                                            <div class="col-100" style="text-align: left;font-weight: bold;">Put your work description here...</div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-100" style="text-align: left; margin-top: 10px;">
+                                                                <a href="#">
+                                                                    <i class="material-icons" style="color: grey;">edit</i>
+                                                                </a>
+                                                                <a href="#">
+                                                                    <i class="material-icons" style="color: #ff2c2c; margin-left: 10px;">delete</i>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    </div>
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <!--
+                    <div class="content-block-title" style="font-weight: lighter;">TOTAL ALL CONFIRM: <span style="color: #ff2525; font-weight: bolder;">RM XXXXX</span>
+                    </div>
+-->
+                </div>
+            </div>
+            <div id="tab3" class="page-content tab swiper-slide swiper-slide-active active" style="width: 360px;">
+                <div class="content-block top-adjust">
+                    <div class="list-block accordion-list">
+                        <ul>
+                            <li class="accordion-item">
+                                <a href="#" class="item-link item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title-row">
+                                            <div class="item-title">Cashier</div>
+                                            <div class="item-after" style="margin-left: 0;">20 Dec 2016</div>
+                                        </div>
+                                        <div class="item-subtitle"><span class="badge" style="background: rgba(255, 255, 255, 0); border: 1px #e00472 solid; border-radius: 3px; color: #e00472;">new</span></div>
+
+                                    </div>
+                                </a>
+                                <div class="accordion-item-content" style="">
+                                    <div class="list-block">
+                                        <article>
+                                            <div class="card ks-card-header-pic">
+                                                <div class="card-footer">
+                                                    <div class="col-100" style="font-size: 3vmin;">
+                                                        <div class="row">
+                                                            <div class="col-100" style="text-align: left; font-weight: lighter;">Category</div>
+                                                            <div class="col-100" style="text-align: left;font-weight: bold;">Hotel and Restourant</div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-100" style="text-align: left; font-weight: lighter;">Description</div>
+                                                            <div class="col-100" style="text-align: left;font-weight: bold;">Put your work description here...</div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-100" style="text-align: left; margin-top: 10px;">
+                                                                <a href="#">
+                                                                    <i class="material-icons" style="color: grey;">edit</i>
+                                                                </a>
+                                                                <a href="#">
+                                                                    <i class="material-icons" style="color: #ff2c2c; margin-left: 10px;">delete</i>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="accordion-item">
+                                <a href="#" class="item-link item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title-row">
+                                            <div class="item-title">Cleaner</div>
+                                            <div class="item-after" style="margin-left: 0;">01 Nov 2016</div>
+                                        </div>
+                                        <div class="item-subtitle"><span class="badge" style="background: rgba(255, 255, 255, 0); border: 1px #005fbe solid; border-radius: 3px; color: #005fbe;">applied</span></div>
+
+                                    </div>
+                                </a>
+                                <div class="accordion-item-content" style="">
+                                    <div class="list-block">
+                                        <article>
+                                            <div class="card ks-card-header-pic">
+                                                <div class="card-footer">
+                                                    <div class="col-100" style="font-size: 3vmin;">
+                                                        <div class="row">
+                                                            <div class="col-100" style="text-align: left; font-weight: lighter;">Category</div>
+                                                            <div class="col-100" style="text-align: left;font-weight: bold;">Hotel and Restourant</div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-100" style="text-align: left; font-weight: lighter;">Description</div>
+                                                            <div class="col-100" style="text-align: left;font-weight: bold;">Put your work description here...</div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-100" style="text-align: left; margin-top: 10px;">
+                                                                <a href="#">
+                                                                    <i class="material-icons" style="color: grey;">edit</i>
+                                                                </a>
+                                                                <a href="#">
+                                                                    <i class="material-icons" style="color: #ff2c2c; margin-left: 10px;">delete</i>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="accordion-item">
+                                <a href="#" class="item-link item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title-row">
+                                            <div class="item-title">Waiter</div>
+                                            <div class="item-after" style="margin-left: 0;">16 October 2016</div>
+                                        </div>
+                                        <div class="item-subtitle"><span class="badge" style="background: rgba(255, 255, 255, 0); border: 1px #00be5f solid; border-radius: 3px; color: #00be5f;">Accept</span></div>
+
+                                    </div>
+                                </a>
+                                <div class="accordion-item-content" style="">
+                                    <div class="list-block">
+                                        <article>
+                                            <div class="card ks-card-header-pic">
+                                                <div class="card-footer">
+                                                    <div class="col-100" style="font-size: 3vmin;">
+                                                        <div class="row">
+                                                            <div class="col-100" style="text-align: left; font-weight: lighter;">Category</div>
+                                                            <div class="col-100" style="text-align: left;font-weight: bold;">Hotel and Restourant</div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-100" style="text-align: left; font-weight: lighter;">Description</div>
+                                                            <div class="col-100" style="text-align: left;font-weight: bold;">Put your work description here...</div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-100" style="text-align: left; margin-top: 10px;">
+                                                                <a href="#">
+                                                                    <i class="material-icons" style="color: grey;">edit</i>
+                                                                </a>
+                                                                <a href="#">
+                                                                    <i class="material-icons" style="color: #ff2c2c; margin-left: 10px;">delete</i>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    </div>
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <!--
+                    <div class="content-block-title" style="font-weight: lighter;">TOTAL ALL CONFIRM: <span style="color: #ff2525; font-weight: bolder;">RM XXXXX</span>
+                    </div>
+-->
+                </div>
+            </div>
+            <div id="tab4" class="page-content tab swiper-slide swiper-slide-prev" style="width: 360px;">
+                <div class="content-block top-adjust">
+                    <div class="content-block-title">Profile</div>
+                    <div class="list-block">
+                        <ul>
+                            <li>
+                                <a href="#" class="item-link item-content">
+                                    <div class="item-media"><i class="icon material-icons" style="color: #ffbe2d;">person</i></div>
+                                    <div class="item-inner">
+                                        <div class="item-title">Profile Detail</div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="item-link item-content">
+                                    <div class="item-media"><i class="icon material-icons">star</i></div>
+                                    <div class="item-inner">
+                                        <div class="item-title">Rating</div>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="content-block-title">More</div>
+                    <div class="list-block">
+                        <ul>
+                            <li>
+                                <a href="#" class="item-link item-content">
+                                    <div class="item-media"><i class="icon material-icons" style="color: #ff4141;">favorite</i></div>
+                                    <div class="item-inner">
+                                        <div class="item-title">Favorite</div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="item-link item-content">
+                                    <div class="item-media"><i class="icon material-icons" style="color: #335aff;">book</i></div>
+                                    <div class="item-inner">
+                                        <div class="item-title">Book</div>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
