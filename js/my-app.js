@@ -105,8 +105,8 @@ $$(document).on('click', '#register-btn', function () {
         errorModal('Register Error!', 'Password Mismatch');
         return;
     }
-    //    $$('#register-form').trigger('submit');
-    //    var formData = myApp.formToJSON('#register-form');
+    $$('#register-form').trigger('submit');
+    var formData = myApp.formToJSON('#register-form');
 });
 $$(document).on('click', '.fav', function () {
     $(this).toggleClass('color-change')

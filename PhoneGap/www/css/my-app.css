@@ -13,7 +13,7 @@ Template:	    Pepin - Mobile and Tablet Template
 */
 @font-face {
   font-family: "Material Icons";
-  src: url(https://rawgit.com/google/material-design-icons/master/iconfont/MaterialIcons-Regular.woff2) format('woff2'), url(https://rawgit.com/google/material-design-icons/master/iconfont/MaterialIcons-Regular.woff) format('woff'), url(https://rawgit.com/google/material-design-icons/master/iconfont/MaterialIcons-Regular.ttf) format('truetype');
+  src: url(fonts/MaterialIcons-Regular.woff2) format('woff2'), url(fonts/MaterialIcons-Regular.woff) format('woff'), url(fonts/MaterialIcons-Regular.ttf) format('truetype');
 }
 /*
 ===============================================
