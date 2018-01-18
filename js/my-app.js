@@ -1,8 +1,7 @@
 //api link
-var api_user = 'http://www.obe-apps.tk/obe_apiv2/GO_USER_PROFILE.php?action';
-var api_order = 'http://www.obe-apps.tk/obe_apiv2/GO_ORDER_CONTROLLER.php?action';
-var api_product = 'http://www.obe-apps.tk/obe_apiv2/GO_PRODUCT_CONTROLLER.php?action';
-
+var api_user = 'http://www.obe-apps.tk/obe_apiv2/GO_USER_PROFILE.php?action=';
+var api_order = 'http://www.obe-apps.tk/obe_apiv2/GO_ORDER_CONTROLLER.php?action=';
+var api_product = 'http://www.obe-apps.tk/obe_apiv2/GO_PRODUCT_CONTROLLER.php?action=';
 // Init App
 var myApp = new Framework7({
     //    modalTitle: 'Pepin',
@@ -22,27 +21,16 @@ var myApp = new Framework7({
 var $$ = Dom7;
 // Add main view
 var mainView = myApp.addView('.view-main', {});
-
 myApp.onPageInit('home', function (page) {
-	var obe_id = localStorage.getItem('OBE_obe_id');
-    if(obe_id != null){
+    var obe_id = localStorage.getItem('OBE_obe_id');
+    if (obe_id != null) {
         mainView.router.loadPage('home.html');
     }
+    //    else{
+    //        mainView.router.loadPage('login.html');
+    //    }
 }).trigger();
-
-// GENERAL
-//$$.get('http://www.obe-apps.tk/obe_api/GO_USER_PROFILE.php', { action:'test' }, function (data) {
-//    alert(data);
-//});
-$$('a').on('click', function (e) { //Close panel when you open a new page
-    myApp.closePanel();
-});
-$$('a.home').on('click', function (e) { //Close popover when you open a new page
-    myApp.closeModal('.popover-more-home');
-});
-$$('a.more').on('click', function (e) { //Close popover when you open a new page
-    myApp.closeModal('.popover-more');
-});
+// LOGIN & LOGOUT
 $$(document).on('click', '.alert-for-pass', function () {
     myApp.modal({
         title: 'Forgot Password ?'
@@ -50,30 +38,34 @@ $$(document).on('click', '.alert-for-pass', function () {
         , afterText: '<input type="text" class="modal-text-input" placeholder="Your email">'
         , buttons: [{
             text: 'OK'
-    , }, {
+            , onClick: function () {
+                myApp.alert('You clicked Ok!');
+            }
+        , }, {
             text: 'Cancel'
-    , }, ]
+        , }, ]
     });
 });
 $$(document).on('click', '#login-btn', function () {
     if ($$('[name=user_name]').val() == "" || $$('[name=user_password]').val() == "") {
-        myApp.modal({
-            title: 'Login Error!'
-            , text: 'Please enter valid login details'
-            , buttons: [{
-                text: 'OK'
-    }]
-        });
+        errorModal('Login Error!', 'Empty Username/Password');
         return;
     }
     $$('#login-form').trigger('submit');
     var formData = myApp.formToJSON('#login-form');
-    $$.get(api_user+'login', $$.serializeObject(formData), function (data) {
-        var dataJSON = JSON.parse(data);
-        Object.keys(dataJSON[0]).forEach(function (key) {
-            localStorage.setItem('OBE_' + key, dataJSON[0][key]);
-        });
-        mainView.router.loadPage('home.html');
+    $$.get(api_user + 'login', $$.serializeObject(formData), function (data) {
+        if (data != "") {
+            var dataJSON = JSON.parse(data);
+            Object.keys(dataJSON[0]).forEach(function (key) {
+                localStorage.setItem('OBE_' + key, dataJSON[0][key]);
+            });
+            mainView.router.loadPage('home.html');
+        }
+        else {
+            errorModal('Login Error!', 'Invalid Login');
+        }
+    }, function () {
+        errorModal('Login Error!', 'Connection Error');
     });
 });
 $$(document).on('click', '.logout', function () {
@@ -93,8 +85,28 @@ $$(document).on('click', '.logout', function () {
             }
     }, {
             text: 'Cancel'
-    , }, ]
+        , }, ]
     });
+});
+//REGISTER
+$$(document).on('click', '#register-btn', function () {
+    var has_empty = false;
+    $('#register-form').find('input[type!="hidden"]').each(function () {
+        if (!$(this).val()) {
+            has_empty = true;
+            return false;
+        }
+    });
+    if (has_empty) {
+        errorModal('Register Error!', 'All fields required');
+        return;
+    }
+    if ($$('[name=confirmpassword]').val() != $$('[name=regpassword]').val()) {
+        errorModal('Register Error!', 'Password Mismatch');
+        return;
+    }
+    //    $$('#register-form').trigger('submit');
+    //    var formData = myApp.formToJSON('#register-form');
 });
 $$(document).on('click', '.fav', function () {
     $(this).toggleClass('color-change')
@@ -216,40 +228,13 @@ function cari() {
 function pangkah() {
     $('form#cari').removeClass('layer searchbar-active');
 }
-//function add_advert() {
-//    
-////    $('div.tukar:nth-child(1)').html().replace('active','saya');
-//    $('div.tukar').replaceWith('<h2>New heading</h2>');
-//    alert($('div.tukar').html());
-//}
-//function fav() {
-//    $('.fav').addClass('color-change');
-//    $('.fav').attr('onclick','unfav()');
-//}
-//function unfav() {
-//    $('.fav').removeClass('color-change');
-//    $('.fav').attr('onclick','fav()');
-//}
-//
-//$('.fav').click(function () {
-//    alert(111);
-//            $(this).click(function () {
-//                alert(111);
-//                if ($(this).hasClass('color-change')) {
-//                    alert(222);
-//                    $(this).removeClass('color-change');
-//                } else {
-//                    alert(111);
-//                    $(this).addClass('color-change');
-//                }
-//            });
-//});
-//function fav() {
-//    if ($('.fav').hasClass('color-change')) {
-//        alert(222);
-//        $('.fav').removeClass('color-change');
-//    } else {
-//        alert(111);
-//        $('.fav').addClass('color-change');
-//    }
-//}
+
+function errorModal(title, text) {
+    myApp.modal({
+        title: title
+        , text: text
+        , buttons: [{
+            text: 'Close'
+    }]
+    });
+}
