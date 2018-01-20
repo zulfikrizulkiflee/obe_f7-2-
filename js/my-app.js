@@ -21,25 +21,42 @@ var myApp = new Framework7({
 var $$ = Dom7;
 // Add main view
 var mainView = myApp.addView('.view-main', {});
-myApp.onPageInit('home', function (page) {
-    var obe_id = localStorage.getItem('OBE_obe_id');
-    if (obe_id != null) {
-        mainView.router.loadPage('home.html');
-    }
-    //    else{
-    //        mainView.router.loadPage('login.html');
-    //    }
-}).trigger();
 // LOGIN & LOGOUT
 $$(document).on('click', '.alert-for-pass', function () {
     myApp.modal({
         title: 'Forgot Password ?'
         , text: 'Please enter your email'
-        , afterText: '<input type="text" class="modal-text-input" placeholder="Your email">'
+        , afterText: '<input type="text" class="modal-text-input forgotpw-email" placeholder="Your email">'
         , buttons: [{
             text: 'OK'
             , onClick: function () {
-                myApp.alert('You clicked Ok!');
+                var email = $$('.forgotpw-email').val();
+                if (email != "") {
+                    myApp.showIndicator();
+                    $$.get(api_user + 'forgotpassword', {
+                        email: email
+                    }, function (response) {
+                        var response = extractAJAX(response);
+                        if (response.status == true) {
+                            myModal('Password Reset', response.data);
+                            myApp.hideIndicator();
+                            mainView.router.loadPage('login.html');
+                        }
+                        else {
+                            myApp.hideIndicator();
+                            myModal('Reset Password Error!', response.data);
+                        }
+                    });
+                }
+                else {
+                    myApp.modal({
+                        title: 'Forgot Password ?'
+                        , text: 'Email is empty'
+                        , buttons: [{
+                            text: 'OK'
+                        }]
+                    });
+                }
             }
         , }, {
             text: 'Cancel'
@@ -48,24 +65,24 @@ $$(document).on('click', '.alert-for-pass', function () {
 });
 $$(document).on('click', '#login-btn', function () {
     if ($$('[name=user_name]').val() == "" || $$('[name=user_password]').val() == "") {
-        errorModal('Login Error!', 'Empty Username/Password');
+        myModal('Login Error!', 'Empty Username/Password');
         return;
     }
     $$('#login-form').trigger('submit');
     var formData = myApp.formToJSON('#login-form');
-    $$.get(api_user + 'login', $$.serializeObject(formData), function (data) {
-        if (data != "") {
-            var dataJSON = JSON.parse(data);
-            Object.keys(dataJSON[0]).forEach(function (key) {
-                localStorage.setItem('OBE_' + key, dataJSON[0][key]);
+    $$.get(api_user + 'login', $$.serializeObject(formData), function (response) {
+        var response = extractAJAX(response);
+        if (response.status == true) {
+            Object.keys(response.data[0]).forEach(function (key) {
+                localStorage.setItem('OBE_' + key, response.data[0][key]);
             });
             mainView.router.loadPage('home.html');
         }
         else {
-            errorModal('Login Error!', 'Invalid Login');
+            myModal('Login Error!', response.data);
         }
     }, function () {
-        errorModal('Login Error!', 'Connection Error');
+        myModal('Login Error!', 'Connection Error');
     });
 });
 $$(document).on('click', '.logout', function () {
@@ -98,15 +115,33 @@ $$(document).on('click', '#register-btn', function () {
         }
     });
     if (has_empty) {
-        errorModal('Register Error!', 'All fields required');
+        myModal('Register Error!', 'All fields required');
         return;
     }
     if ($$('[name=confirmpassword]').val() != $$('[name=regpassword]').val()) {
-        errorModal('Register Error!', 'Password Mismatch');
+        myModal('Register Error!', 'Password Mismatch');
         return;
     }
-    $$('#register-form').trigger('submit');
-    var formData = myApp.formToJSON('#register-form');
+    myApp.confirm('Are you sure?', 'Register', function () {
+        myApp.showIndicator();
+        $$('#register-form').trigger('submit');
+        var formData = myApp.formToJSON('#register-form');
+        $$.get(api_user + 'register', $$.serializeObject(formData), function (response) {
+            var response = extractAJAX(response);
+            if (response.status == true) {
+                myModal('Registration Successful!', response.data);
+                myApp.hideIndicator();
+                mainView.router.loadPage('login.html');
+            }
+            else {
+                myApp.hideIndicator();
+                myModal('Registration Error!', response.data);
+            }
+        }, function () {
+            myApp.hideIndicator();
+            myModal('Registration Error!', 'Connection Error');
+        });
+    });
 });
 $$(document).on('click', '.fav', function () {
     $(this).toggleClass('color-change')
@@ -133,6 +168,16 @@ $$('#avatarCapture').on('change', gotPic);
 $$('i.material-icons.fav').on('click', function (e) { //Changing color icons onclick
     $$(this).toggleClass('color-change');
 });
+myApp.onPageInit('home', function (page) {
+    var obe_id = localStorage.getItem('OBE_obe_id');
+    if (obe_id != null) {
+        $$('.user-callsign').html(localStorage.getItem('OBE_user_callsign'));
+        mainView.router.loadPage('home.html');
+    }
+    //    else{
+    //        mainView.router.loadPage('login.html');
+    //    }
+}).trigger();
 myApp.onPageInit('profile', function (page) {
     $$('i.material-icons.fav').on('click', function (e) { //Changing color icons onclick
         $$(this).toggleClass('color-change');
@@ -172,7 +217,7 @@ myApp.onPageInit('notifications', function (page) { //Change icon when add or de
         $(this).replaceWith('<div class="item-after"><i class="material-icons done">done</i></div>');
     });
     $$(document).on('click', 'i.material-icons.done', function () {
-        $(this).replaceWith('<div class="item-after"><i class="material-icons add">person_add</i></div>');
+        $(this).replaceWith('<div class="item-after"><i class="material-icons add">&#xE7FE;</i></div>');
     });
 });
 myApp.onPageInit('followers', function (page) { //Change icon when add or delete person
@@ -180,7 +225,7 @@ myApp.onPageInit('followers', function (page) { //Change icon when add or delete
         $(this).replaceWith('<div class="item-after"><i class="material-icons done">done</i></div>');
     });
     $$(document).on('click', 'i.material-icons.done', function () {
-        $(this).replaceWith('<div class="item-after"><i class="material-icons add">person_add</i></div>');
+        $(this).replaceWith('<div class="item-after"><i class="material-icons add">&#xE7FE;</i></div>');
     });
 });
 myApp.onPageInit('following', function (page) { //Change icon when add or delete person
@@ -188,7 +233,7 @@ myApp.onPageInit('following', function (page) { //Change icon when add or delete
         $(this).replaceWith('<div class="item-after"><i class="material-icons done">done</i></div>');
     });
     $$(document).on('click', 'i.material-icons.done', function () {
-        $(this).replaceWith('<div class="item-after"><i class="material-icons add">person_add</i></div>');
+        $(this).replaceWith('<div class="item-after"><i class="material-icons add">&#xE7FE;</i></div>');
     });
 });
 myApp.onPageInit('index2', function (page) { //Change icon when add or delete person
@@ -196,7 +241,7 @@ myApp.onPageInit('index2', function (page) { //Change icon when add or delete pe
         $(this).replaceWith('<div class="item-after"><i class="material-icons done">done</i></div>');
     });
     $$(document).on('click', 'i.material-icons.done', function () {
-        $(this).replaceWith('<div class="item-after"><i class="material-icons add">person_add</i></div>');
+        $(this).replaceWith('<div class="item-after"><i class="material-icons add">&#xE7FE;</i></div>');
     });
 });
 // PAGES FUNCTION
@@ -220,6 +265,31 @@ myApp.onPageInit('article', function (page) {
         myApp.actions(buttons);
     });
 });
+//FUNCTIONS
+function extractAJAX(response) {
+    var responseJSON = JSON.parse(response);
+    var dataJSON;
+    if (responseJSON[0].status == true && IsJsonString(responseJSON[0].data) == true) {
+        dataJSON = JSON.parse(responseJSON[0].data);
+    }
+    else {
+        dataJSON = responseJSON[0].data;
+    }
+    return {
+        status: responseJSON[0].status
+        , data: dataJSON
+    };
+}
+
+function IsJsonString(str) {
+    try {
+        JSON.parse(str);
+    }
+    catch (e) {
+        return false;
+    }
+    return true;
+}
 
 function cari() {
     $('form#cari').addClass('layer searchbar-active');
@@ -229,7 +299,7 @@ function pangkah() {
     $('form#cari').removeClass('layer searchbar-active');
 }
 
-function errorModal(title, text) {
+function myModal(title, text) {
     myApp.modal({
         title: title
         , text: text
