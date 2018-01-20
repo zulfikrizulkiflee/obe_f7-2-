@@ -186,8 +186,8 @@ a.link.author,
 
 .article-header,
 .profile-header {
-    max-width: 100%;
-    height: auto;
+    height:300px;
+    width: auto;
     margin-top: -56px;
 }
 
