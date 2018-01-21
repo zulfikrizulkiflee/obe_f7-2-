@@ -1,4 +1,6 @@
 //api link
+var api_user_image = 'http://www.obe-apps.tk/obe_apiv2/upload/';
+var api_product_image = 'http://www.obe-apps.tk/obe_apiv2/product/';
 var api_user = 'http://www.obe-apps.tk/obe_apiv2/GO_USER_PROFILE.php?action=';
 var api_order = 'http://www.obe-apps.tk/obe_apiv2/GO_ORDER_CONTROLLER.php?action=';
 var api_product = 'http://www.obe-apps.tk/obe_apiv2/GO_PRODUCT_CONTROLLER.php?action=';
@@ -174,18 +176,82 @@ myApp.onPageInit('home', function (page) {
         $$('.user-callsign').html(localStorage.getItem('OBE_user_callsign'));
         mainView.router.loadPage('home.html');
     }
-    //    else{
-    //        mainView.router.loadPage('login.html');
-    //    }
+    else {
+        mainView.router.loadPage('login.html');
+    }
 }).trigger();
+myApp.onPageInit('home', function (page) {
+    $$('.refresh-page').on('click', function () {
+        page.view.router.refreshPage();
+    });
+    var ctx = $('#chart');
+    var myChart = new Chart(ctx, {
+        type: 'line'
+        , data: {
+            datasets: [{
+                label: 'Buying'
+                , data: [12, 19, 3, 5, 2, 3, 5]
+                , backgroundColor: 'transparent'
+                , borderColor: 'rgba(255,99,132,1)'
+                , borderWidth: 1
+                , lineTension: 0
+            , }, {
+                label: 'Selling'
+                , data: [2, 9, 13, 15, 12, 13, 1]
+                , backgroundColor: 'transparent'
+                , borderColor: '#36a2eb'
+                , borderWidth: 1
+                , lineTension: 0
+            , }]
+            , labels: ['15/1', '16/1', '17/1', '18/1', '19/1', '20/1', '21/1']
+        }
+        , options: {
+            responsive: true
+            , legend: {
+                position: 'top'
+                , labels: {
+                    usePointStyle: true
+                }
+            }
+        }
+    });
+});
+var tabClick;
 myApp.onPageInit('profile', function (page) {
     $$('i.material-icons.fav').on('click', function (e) { //Changing color icons onclick
         $$(this).toggleClass('color-change');
     });
     if (localStorage.getItem('OBE_obe_id') != null) {
         $$('.user_name').html(localStorage.getItem('OBE_user_name'));
-        $$('.user_img').attr('src', 'http://www.obe-apps.tk/obe_api/upload/' + localStorage.getItem('OBE_user_img'));
+        $$('.user_img').attr('src', api_user_image + localStorage.getItem('OBE_user_img'));
     }
+    $$('.to-pay').on('click', function () {
+        tabClick = "#to-pay";
+    });
+    $$('.to-receive').on('click', function () {
+        tabClick = "#to-receive";
+    });
+    $$('.completed').on('click', function () {
+        tabClick = "#completed";
+    });
+});
+myApp.onPageInit('my-purchase', function (page) {
+    $$(tabClick).addClass('active');
+    $('[href=' + tabClick + ']').addClass('active');
+    switch (tabClick) {
+    case '#to-pay':
+        $$('.mypurchase-tab .tab-link-highlight').attr('style', 'width: 33.3333%;transform: translate3d(0%, 0px, 0px);');
+        break;
+    case '#to-receive':
+        $$('.mypurchase-tab .tab-link-highlight').attr('style', 'width: 33.3333%; transform: translate3d(100%, 0px, 0px);');
+        break;
+    case '#completed':
+        $$('.mypurchase-tab .tab-link-highlight').attr('style', 'width: 33.3333%; transform: translate3d(200%, 0px, 0px);');
+        break;
+    }
+    $$('.mypurchase-tab-content .tab').on('show', function () {
+        alert("yes");
+    });
 });
 myApp.onPageInit('photos', function (page) {
     $$('i.material-icons.fav').on('click', function (e) { //Changing color icons onclick

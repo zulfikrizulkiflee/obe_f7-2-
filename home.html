@@ -4,21 +4,15 @@
             <!--            <div class="left"><a href="#" class="open-panel link icon-only"><i class="material-icons">menu</i></a></div>-->
             <div class="center user-callsign"></div>
             <div class="right">
-                <a href="" class="link icon-only" onclick="cari()"><i class="material-icons" >search</i></a>
-                <a href="notification.html" class="link icon-only"><i class="material-icons">notifications</i><span class="badge" style="color:#5a5a5a; position: absolute;border-radius: 50%; width: 20px; height: 20px; line-height: 20px; text-align: center; left: 20px;top: 13px; background: #ffc400;">2</span></a>
-                <a href="#" class="link icon-only logout"><i class="material-icons">&#xE8AC;</i></a>
-            </div>
+                <!--
+                <a href="" class="link icon-only" onclick="cari()"><i class="material-icons" >search</i>
+                </a> 
+--><a href="" class="link icon-only refresh-page"><i class="material-icons">&#xE5D5;</i></a><a href="notification.html" class="link icon-only"><i class="material-icons">notifications</i><span class="badge" style="color:#5a5a5a; position: absolute;border-radius: 50%; width: 20px; height: 20px; line-height: 20px; text-align: center; left: 20px;top: 13px; background: #ffc400;">2</span></a> <a href="#" class="link icon-only logout"><i class="material-icons">&#xE8AC;</i></a> </div>
         </div>
     </div>
-
     <div class="speed-dial">
-        <a href="#" class="floating-button">
-            <i class="icon icon-plus"></i>
-            <i class="icon icon-close"></i>
-        </a>
-        <div class="speed-dial-buttons">
-            <a href="new-advert.html"><i class="material-icons">playlist_add</i></a>
-        </div>
+        <a href="#" class="floating-button"> <i class="icon icon-plus"></i> <i class="icon icon-close"></i> </a>
+        <div class="speed-dial-buttons"> <a href="new-product.html" style="background: #f66c26"><i class="material-icons">&#xE03B;</i></a><a href="new-order.html" style="background: #ff0707;"><i class="material-icons">&#xE854;</i></a> </div>
     </div>
     <form id="cari" data-search-list=".search-here" data-search-in=".item-title" class="searchbar searchbar-init">
         <div class="searchbar-input">
@@ -27,18 +21,12 @@
         </div>
     </form>
     <div class="toolbar tabbar">
-        <div class="toolbar-inner ">
-            <a href="#tab1" class="tab-link active"><i class="icon-tab material-icons">&#xE88A;</i><span class="tabbar-label">Home</span></a>
-            <a href="#tab2" class="tab-link"><i class="icon-tab material-icons">&#xE8CC;</i><span class="tabbar-label">Orders</span></a>
-            <a href="#tab3" class="tab-link"><i class="icon-tab material-icons">&#xE54C;</i><span class="tabbar-label">Products</span></a>
-            <a href="#tab4" class="tab-link"><i class="icon-tab material-icons">&#xE5D4;</i><span class="tabbar-label">More</span></a>
-            <span class="tab-link-highlight" style="width: 25%; transform: translate3d(200%, 0px, 0px);"></span>
-        </div>
+        <div class="toolbar-inner "> <a href="#tab1" class="tab-link active"><i class="icon-tab material-icons">&#xE88A;</i><span class="tabbar-label">Home</span></a> <a href="#tab2" class="tab-link"><i class="icon-tab material-icons">&#xE8CC;</i><span class="tabbar-label">Orders</span></a> <a href="#tab3" class="tab-link"><i class="icon-tab material-icons">&#xE54C;</i><span class="tabbar-label">Products</span></a> <a href="#tab4" class="tab-link"><i class="icon-tab material-icons">&#xE5D4;</i><span class="tabbar-label">More</span></a> <span class="tab-link-highlight" style="width: 25%; transform: translate3d(200%, 0px, 0px);"></span> </div>
     </div>
     <div class="tabs-swipeable-wrap swiper-container swiper-container-horizontal swiper-container-android">
         <div class="tabs swiper-wrapper" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px);">
             <div id="tab1" class="page-content tab swiper-slide swiper-slide-active active" style="width: 360px;">
-                <div class="content-block page-home">
+                <div class="content-block page-home" style="border-bottom: 5px solid #f2f2f2;margin-bottom:0;">
                     <!--
                     <div class="row no-gutter">
                         <div data-pagination=".swiper-pagination" data-paginationhide="true" class="swiper-container swiper-init ks-demo-slider swiper-container-horizontal swiper-container-android">
@@ -80,16 +68,23 @@
 -->
                     <div class="row no-gutter">
                         <div class="col-100">
-                            <p>Category</p>
+                            <p style="color:#333;"><span class="new-order" style="font-size: 18px;">Weekly Statistic</p>
                         </div>
+                        <div class="chart-container" style="position: relative;height: 100%;width:100%">
+                            <canvas id="chart"></canvas>
+                        </div>
+                        <div class="col-60">
+                            <p style="color:#333;"><span class="new-order" style="font-size: 18px;">0</span> Unprocess Order</p>
+                        </div>
+                        <div class="col-40"> <a href="#" class="button button-raised" style="width: fit-content;margin: 10px auto;font-size:12px;">View</a> </div>
                     </div>
+                    <!--
                     <div class="row no-gutter">
                         <div class="col-50">
                             <div class="card ks-facebook-card">
                                 <a href="list_work.html">
                                     <div class="card-content">
-                                        <div class="card-content-inner">
-                                            <img src="img/Restoran.jpg" width="100%">
+                                        <div class="card-content-inner"> <img src="img/Restoran.jpg" width="100%">
                                             <p class="color-gray">Hotel/Restaurant</p>
                                         </div>
                                     </div>
@@ -100,8 +95,7 @@
                             <div class="card ks-facebook-card">
                                 <a href="list_work.html">
                                     <div class="card-content">
-                                        <div class="card-content-inner">
-                                            <img src="img/MediaArt.jpg" width="100%">
+                                        <div class="card-content-inner"> <img src="img/MediaArt.jpg" width="100%">
                                             <p class="color-gray">Arts/Media</p>
                                         </div>
                                     </div>
@@ -112,8 +106,7 @@
                             <div class="card ks-facebook-card">
                                 <a href="list_work.html">
                                     <div class="card-content">
-                                        <div class="card-content-inner">
-                                            <img src="img/gomen.jpg" width="100%">
+                                        <div class="card-content-inner"> <img src="img/gomen.jpg" width="100%">
                                             <p class="color-gray">Government</p>
                                         </div>
                                     </div>
@@ -124,8 +117,7 @@
                             <div class="card ks-facebook-card">
                                 <a href="list_work.html">
                                     <div class="card-content">
-                                        <div class="card-content-inner">
-                                            <img src="img/jambatan.jpg" width="100%">
+                                        <div class="card-content-inner"> <img src="img/jambatan.jpg" width="100%">
                                             <p class="color-gray">Architecture & Design</p>
                                         </div>
                                     </div>
@@ -136,8 +128,7 @@
                             <div class="card ks-facebook-card">
                                 <a href="list_work.html">
                                     <div class="card-content">
-                                        <div class="card-content-inner">
-                                            <img src="img/technical.jpg" width="100%">
+                                        <div class="card-content-inner"> <img src="img/technical.jpg" width="100%">
                                             <p class="color-gray">Technician</p>
                                         </div>
                                     </div>
@@ -148,8 +139,7 @@
                             <div class="card ks-facebook-card">
                                 <a href="list_work.html">
                                     <div class="card-content">
-                                        <div class="card-content-inner">
-                                            <img src="img/sales.jpg" width="100%">
+                                        <div class="card-content-inner"> <img src="img/sales.jpg" width="100%">
                                             <p class="color-gray">Sales & Marketing</p>
                                         </div>
                                     </div>
@@ -160,8 +150,7 @@
                             <div class="card ks-facebook-card">
                                 <a href="list_work.html">
                                     <div class="card-content">
-                                        <div class="card-content-inner">
-                                            <img src="img/tourism.jpg" width="100%">
+                                        <div class="card-content-inner"> <img src="img/tourism.jpg" width="100%">
                                             <p class="color-gray">Tourism</p>
                                         </div>
                                     </div>
@@ -172,15 +161,82 @@
                             <div class="card ks-facebook-card">
                                 <a href="list_worker.html">
                                     <div class="card-content">
-                                        <div class="card-content-inner">
-                                            <img src="img/MediaArt.jpg" width="100%">
+                                        <div class="card-content-inner"> <img src="img/MediaArt.jpg" width="100%">
                                             <p class="color-gray">Arts/Media</p>
                                         </div>
                                     </div>
                                 </a>
                             </div>
                         </div>
-
+                    </div>
+--></div>
+                <!--
+                <form data-search-list=".list-block-search" data-search-in=".item-title" class="searchbar searchbar-init">
+                    <div class="searchbar-input">
+                        <input type="search" placeholder="Search">
+                        <a href="#" class="searchbar-clear"></a>
+                    </div><a href="#" class="searchbar-cancel">Cancel</a> </form>
+                 Search Bar overlay 
+                <div class="searchbar-overlay"></div>
+-->
+                <div class="page-content" style="padding:0;height: auto;margin-bottom: 80px;">
+                    <!-- This block will be displayed if nothing found -->
+                    <div class="content-block searchbar-not-found">
+                        <div class="content-block-inner">Nothing found</div>
+                    </div>
+                    <!-- This block will be displayed if anything found, and this list block is used a searbar target -->
+                    <div class="list-block list-block-search searchbar-found media-list pending-order-list" style="margin:0">
+                        <div class="col-100">
+                            <p style="color:#333;"><span class="new-order" style="font-size: 18px;">Feeds</p>
+                        </div>
+                        <ul>
+                            <li style="border-bottom:1px solid lightgray">
+                                <a href="#" class="item-link item-content">
+                                    <div class="item-media"><img src="img/product3.jpg" width="80"><span class="badge order-status" style="color:#5a5a5a; position: absolute; height: 20px; line-height: 20px; text-align: center; left: 8px;top: 9px; background: #ff5722;color:#fff;font-weight:bold">New</span></div>
+                        <div class="item-inner">
+                            <div class="item-title-row" style="padding-right:0">
+                                <div class="order-id" style="text-align:left">#OBE5678</div>
+                                <div class="chip" style="margin-top:-10px;margin-right:-10px;">
+                                    <div class="chip-media"><img src="http://lorempixel.com/100/100/people/9/"></div>
+                                    <div class="chip-label agent-chip">Jane Doe</div>
+                                </div>
+                            </div>
+                            <div class="order-from"><b>Siti Payung</b></div>
+                            <div class="item-title-row" style="padding-right:0">
+                                <div class="item-quantity"><b>1x</b></div>
+                                <div class="item-title">Jam Tangan Murah</div>
+                            </div>
+                            <div class="item-title-row" style="padding-right:0">
+                                <div class="order-date">23/05/2017</div>
+                                <div class="total-price" style="color:#ff5722;text-align:right;font-weight:bold">RM20</div>
+                            </div>
+                        </div>
+                        </a>
+                        </li>
+                        <li style="border-bottom:1px solid lightgray">
+                            <a href="#" class="item-link item-content">
+                                <div class="item-media"><img src="img/product2.jpg" width="80"><span class="badge order-status" style="color:#5a5a5a; position: absolute; height: 20px; line-height: 20px; text-align: center; left: 8px;top: 9px; background: #ff5722;color:#fff;font-weight:bold">New</span></div>
+                                <div class="item-inner">
+                                    <div class="item-title-row" style="padding-right:0">
+                                        <div class="order-id" style="text-align:left">#OBE1234</div>
+                                        <div class="chip" style="margin-top:-10px;margin-right:-10px;">
+                                            <div class="chip-media"><img src="http://lorempixel.com/100/100/people/10/"></div>
+                                            <div class="chip-label agent-chip">John Doe</div>
+                                        </div>
+                                    </div>
+                                    <div class="order-from"><b>Ahmad Albab</b></div>
+                                    <div class="item-title-row" style="padding-right:0">
+                                        <div class="item-quantity"><b>1x</b></div>
+                                        <div class="item-title">Awning Wira</div>
+                                    </div>
+                                    <div class="item-title-row" style="padding-right:0">
+                                        <div class="order-date">15/05/2017</div>
+                                        <div class="total-price" style="color:#ff5722;text-align:right;font-weight:bold">RM80</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -196,7 +252,6 @@
                                             <div class="item-after" style="margin-left: 0;">20 Dec 2016</div>
                                         </div>
                                         <div class="item-subtitle"><span class="badge" style="background: rgba(255, 255, 255, 0); border: 1px #e00472 solid; border-radius: 3px; color: #e00472;">new</span></div>
-
                                     </div>
                                 </a>
                                 <div class="accordion-item-content" style="">
@@ -215,12 +270,8 @@
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-100" style="text-align: left; margin-top: 10px;">
-                                                                <a href="#">
-                                                                    <i class="material-icons" style="color: grey;">edit</i>
-                                                                </a>
-                                                                <a href="#">
-                                                                    <i class="material-icons" style="color: #ff2c2c; margin-left: 10px;">delete</i>
-                                                                </a>
+                                                                <a href="#"> <i class="material-icons" style="color: grey;">edit</i> </a>
+                                                                <a href="#"> <i class="material-icons" style="color: #ff2c2c; margin-left: 10px;">delete</i> </a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -238,7 +289,6 @@
                                             <div class="item-after" style="margin-left: 0;">01 Nov 2016</div>
                                         </div>
                                         <div class="item-subtitle"><span class="badge" style="background: rgba(255, 255, 255, 0); border: 1px #ff2c2c solid; border-radius: 3px; color: #ff2c2c;">rejected</span></div>
-
                                     </div>
                                 </a>
                                 <div class="accordion-item-content" style="">
@@ -257,12 +307,8 @@
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-100" style="text-align: left; margin-top: 10px;">
-                                                                <a href="#">
-                                                                    <i class="material-icons" style="color: grey;">edit</i>
-                                                                </a>
-                                                                <a href="#">
-                                                                    <i class="material-icons" style="color: #ff2c2c; margin-left: 10px;">delete</i>
-                                                                </a>
+                                                                <a href="#"> <i class="material-icons" style="color: grey;">edit</i> </a>
+                                                                <a href="#"> <i class="material-icons" style="color: #ff2c2c; margin-left: 10px;">delete</i> </a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -280,7 +326,6 @@
                                             <div class="item-after" style="margin-left: 0;">16 October 2016</div>
                                         </div>
                                         <div class="item-subtitle"><span class="badge" style="background: rgba(255, 255, 255, 0); border: 1px #00be5f solid; border-radius: 3px; color: #00be5f;">Accept</span></div>
-
                                     </div>
                                 </a>
                                 <div class="accordion-item-content" style="">
@@ -299,12 +344,8 @@
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-100" style="text-align: left; margin-top: 10px;">
-                                                                <a href="#">
-                                                                    <i class="material-icons" style="color: grey;">edit</i>
-                                                                </a>
-                                                                <a href="#">
-                                                                    <i class="material-icons" style="color: #ff2c2c; margin-left: 10px;">delete</i>
-                                                                </a>
+                                                                <a href="#"> <i class="material-icons" style="color: grey;">edit</i> </a>
+                                                                <a href="#"> <i class="material-icons" style="color: #ff2c2c; margin-left: 10px;">delete</i> </a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -314,14 +355,12 @@
                                     </div>
                                 </div>
                             </li>
-
                         </ul>
                     </div>
                     <!--
                     <div class="content-block-title" style="font-weight: lighter;">TOTAL ALL CONFIRM: <span style="color: #ff2525; font-weight: bolder;">RM XXXXX</span>
                     </div>
--->
-                </div>
+--></div>
             </div>
             <div id="tab3" class="page-content tab swiper-slide" style="width: 360px;">
                 <div class="content-block top-adjust">
@@ -335,7 +374,6 @@
                                             <div class="item-after" style="margin-left: 0;">20 Dec 2016</div>
                                         </div>
                                         <div class="item-subtitle"><span class="badge" style="background: rgba(255, 255, 255, 0); border: 1px #e00472 solid; border-radius: 3px; color: #e00472;">new</span></div>
-
                                     </div>
                                 </a>
                                 <div class="accordion-item-content" style="">
@@ -354,12 +392,8 @@
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-100" style="text-align: left; margin-top: 10px;">
-                                                                <a href="#">
-                                                                    <i class="material-icons" style="color: grey;">edit</i>
-                                                                </a>
-                                                                <a href="#">
-                                                                    <i class="material-icons" style="color: #ff2c2c; margin-left: 10px;">delete</i>
-                                                                </a>
+                                                                <a href="#"> <i class="material-icons" style="color: grey;">edit</i> </a>
+                                                                <a href="#"> <i class="material-icons" style="color: #ff2c2c; margin-left: 10px;">delete</i> </a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -377,7 +411,6 @@
                                             <div class="item-after" style="margin-left: 0;">01 Nov 2016</div>
                                         </div>
                                         <div class="item-subtitle"><span class="badge" style="background: rgba(255, 255, 255, 0); border: 1px #005fbe solid; border-radius: 3px; color: #005fbe;">applied</span></div>
-
                                     </div>
                                 </a>
                                 <div class="accordion-item-content" style="">
@@ -396,12 +429,8 @@
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-100" style="text-align: left; margin-top: 10px;">
-                                                                <a href="#">
-                                                                    <i class="material-icons" style="color: grey;">edit</i>
-                                                                </a>
-                                                                <a href="#">
-                                                                    <i class="material-icons" style="color: #ff2c2c; margin-left: 10px;">delete</i>
-                                                                </a>
+                                                                <a href="#"> <i class="material-icons" style="color: grey;">edit</i> </a>
+                                                                <a href="#"> <i class="material-icons" style="color: #ff2c2c; margin-left: 10px;">delete</i> </a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -419,7 +448,6 @@
                                             <div class="item-after" style="margin-left: 0;">16 October 2016</div>
                                         </div>
                                         <div class="item-subtitle"><span class="badge" style="background: rgba(255, 255, 255, 0); border: 1px #00be5f solid; border-radius: 3px; color: #00be5f;">Accept</span></div>
-
                                     </div>
                                 </a>
                                 <div class="accordion-item-content" style="">
@@ -438,12 +466,8 @@
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-100" style="text-align: left; margin-top: 10px;">
-                                                                <a href="#">
-                                                                    <i class="material-icons" style="color: grey;">edit</i>
-                                                                </a>
-                                                                <a href="#">
-                                                                    <i class="material-icons" style="color: #ff2c2c; margin-left: 10px;">delete</i>
-                                                                </a>
+                                                                <a href="#"> <i class="material-icons" style="color: grey;">edit</i> </a>
+                                                                <a href="#"> <i class="material-icons" style="color: #ff2c2c; margin-left: 10px;">delete</i> </a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -453,14 +477,12 @@
                                     </div>
                                 </div>
                             </li>
-
                         </ul>
                     </div>
                     <!--
                     <div class="content-block-title" style="font-weight: lighter;">TOTAL ALL CONFIRM: <span style="color: #ff2525; font-weight: bolder;">RM XXXXX</span>
                     </div>
--->
-                </div>
+--></div>
             </div>
             <div id="tab4" class="page-content tab swiper-slide" style="width: 360px;">
                 <div class="content-block top-adjust">

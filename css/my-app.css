@@ -42,6 +42,7 @@ img.responsive {
 }
 
 a {
+    position: relative;
     color: white;
 }
 
@@ -186,8 +187,8 @@ a.link.author,
 
 .article-header,
 .profile-header {
-    height:300px;
-    width: auto;
+    height: 200px;
+    width: 100%;
     margin-top: -56px;
 }
 
@@ -371,8 +372,24 @@ p.title img,
     background: rgba(0, 0, 0, 0) linear-gradient(135deg, #ee6b29 0%, #ff6d23 100%) repeat scroll 0 0;
 }
 
+
+/*
 .tabbar a.tab-link {
-    font-size: 3vmin !important;
+    font-size: 14px; !important;
+}
+*/
+
+.tab-content {
+    background: #fff;
+    margin: 8px 0;
+    color: #000000;
+}
+
+.tab-content-icon {
+    border-radius: 50%;
+    padding: 4px;
+    color: #fff !important;
+    font-size: 20px;
 }
 
 a.term {
@@ -415,7 +432,7 @@ html:not(.watch-active-state) .floating-button.color-purple:active,
     margin-top: -10px;
 }
 
-.non-rgstr{
+.non-rgstr {
     text-align: center;
 }
 
@@ -492,6 +509,20 @@ p.color-gray {
     top: -5px;
 }
 
+.in-badge {
+    color: #5a5a5a;
+    position: absolute;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    left: 20px;
+    top: -10px;
+    background: #ffc400;
+    z-index: 1;
+}
+
 .icon-tab.material-icons {
     color: grey;
 }
@@ -516,4 +547,15 @@ a.item-link.item-content.noti-tag {
 
 .page-worklist {
     margin-top: 0px;
+}
+
+.infinite-scroll-preloader {
+    margin-top: -20px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.infinite-scroll-preloader .preloader {
+    width: 34px;
+    height: 34px;
 }
