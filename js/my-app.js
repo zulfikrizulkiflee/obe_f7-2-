@@ -66,6 +66,7 @@ $$(document).on('click', '.alert-for-pass', function () {
     });
 });
 $$(document).on('click', '#login-btn', function () {
+    myApp.showIndicator();
     if ($$('[name=user_name]').val() == "" || $$('[name=user_password]').val() == "") {
         myModal('Login Error!', 'Empty Username/Password');
         return;
@@ -86,6 +87,7 @@ $$(document).on('click', '#login-btn', function () {
     }, function () {
         myModal('Login Error!', 'Connection Error');
     });
+    myApp.hideIndicator();
 });
 $$(document).on('click', '.logout', function () {
     myApp.modal({
@@ -240,13 +242,13 @@ myApp.onPageInit('my-purchase', function (page) {
     $('[href=' + tabClick + ']').addClass('active');
     switch (tabClick) {
     case '#to-pay':
-        $$('.mypurchase-tab .tab-link-highlight').attr('style', 'width: 33.3333%;transform: translate3d(0%, 0px, 0px);');
+        $$('.mypurchase-tab .tab-link-highlight').attr('style', 'width: 33.3333%;margin-left:0;');
         break;
     case '#to-receive':
-        $$('.mypurchase-tab .tab-link-highlight').attr('style', 'width: 33.3333%; transform: translate3d(100%, 0px, 0px);');
+        $$('.mypurchase-tab .tab-link-highlight').attr('style', 'width: 33.3333%; margin-left:33.3333%;');
         break;
     case '#completed':
-        $$('.mypurchase-tab .tab-link-highlight').attr('style', 'width: 33.3333%; transform: translate3d(200%, 0px, 0px);');
+        $$('.mypurchase-tab .tab-link-highlight').attr('style', 'width: 33.3333%; margin-left:66.6666%;');
         break;
     }
     $$('.mypurchase-tab-content .tab').on('show', function () {
