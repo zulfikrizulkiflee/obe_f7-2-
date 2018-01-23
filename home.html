@@ -12,7 +12,7 @@
     </div>
     <div class="speed-dial">
         <a href="#" class="floating-button"> <i class="icon icon-plus"></i> <i class="icon icon-close"></i> </a>
-        <div class="speed-dial-buttons"> <a href="new-product.html" style="background: #f66c26"><i class="material-icons">&#xE03B;</i></a><a href="new-order.html" style="background: #ff0707;"><i class="material-icons">&#xE854;</i></a> </div>
+        <div class="speed-dial-buttons"> <a href="#" class="open-vertical-modal" style="background: #f66c26"><i class="material-icons">&#xE03B;</i></a><a href="new-order.html" style="background: #ff0707;"><i class="material-icons">&#xE854;</i></a> </div>
     </div>
     <form id="cari" data-search-list=".search-here" data-search-in=".item-title" class="searchbar searchbar-init">
         <div class="searchbar-input">
@@ -27,48 +27,9 @@
         <div class="tabs swiper-wrapper" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px);">
             <div id="tab1" class="page-content tab swiper-slide swiper-slide-active active" style="width: 360px;">
                 <div class="content-block page-home" style="border-bottom: 5px solid #f2f2f2;margin-bottom:0;">
-                    <!--
-                    <div class="row no-gutter">
-                        <div data-pagination=".swiper-pagination" data-paginationhide="true" class="swiper-container swiper-init ks-demo-slider swiper-container-horizontal swiper-container-android">
-                            <div class="swiper-pagination swiper-pagination-bullets"><span class="swiper-pagination-bullet swiper-pagination-bullet-active"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span></div>
-                            <div class="swiper-wrapper">
-                                <div style="width: 100%; heigth: 30vmin; " class="swiper-slide swiper-slide-active">
-                                    <img src="img/Banner.jpg" width="100%">
-                                </div>
-                                <div style="width: 100%; heigth: 30vmin; " class="swiper-slide swiper-slide-active">
-                                    <img src="img/Banner2.jpg" width="100%">
-                                </div>
-                                <div style="width: 100%; heigth: 30vmin; " class="swiper-slide swiper-slide-active">
-                                    <img src="img/Banner.jpg" width="100%">
-                                </div>
-                                <div style="width: 100%; heigth: 30vmin; " class="swiper-slide swiper-slide-active">
-                                    <img src="img/Banner2.jpg" width="100%">
-                                </div>
-                                <div style="width: 100%; heigth: 30vmin; " class="swiper-slide swiper-slide-active">
-                                    <img src="img/Banner.jpg" width="100%">
-                                </div>
-                                <div style="width: 100%; heigth: 30vmin; " class="swiper-slide swiper-slide-active">
-                                    <img src="img/Banner2.jpg" width="100%">
-                                </div>
-                                <div style="width: 100%; heigth: 30vmin; " class="swiper-slide swiper-slide-active">
-                                    <img src="img/Banner.jpg" width="100%">
-                                </div>
-                                <div style="width: 100%; heigth: 30vmin; " class="swiper-slide swiper-slide-active">
-                                    <img src="img/Banner2.jpg" width="100%">
-                                </div>
-                                <div style="width: 100%; heigth: 30vmin; " class="swiper-slide swiper-slide-active">
-                                    <img src="img/Banner.jpg" width="100%">
-                                </div>
-                                <div style="width: 100%; heigth: 30vmin; " class="swiper-slide swiper-slide-active">
-                                    <img src="img/Banner2.jpg" width="100%">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
--->
                     <div class="row no-gutter">
                         <div class="col-100">
-                            <p style="color:#333;"><span class="new-order" style="font-size: 18px;">Weekly Statistic</p>
+                            <p style="color:#333;"><span style="font-size: 18px;">Weekly Statistic</span></p>
                         </div>
                         <div class="chart-container" style="position: relative;height: 100%;width:100%">
                             <canvas id="chart"></canvas>
@@ -78,164 +39,22 @@
                         </div>
                         <div class="col-40"> <a href="#" class="button button-raised" style="width: fit-content;margin: 10px auto;font-size:12px;">View</a> </div>
                     </div>
-                    <!--
-                    <div class="row no-gutter">
-                        <div class="col-50">
-                            <div class="card ks-facebook-card">
-                                <a href="list_work.html">
-                                    <div class="card-content">
-                                        <div class="card-content-inner"> <img src="img/Restoran.jpg" width="100%">
-                                            <p class="color-gray">Hotel/Restaurant</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-50">
-                            <div class="card ks-facebook-card">
-                                <a href="list_work.html">
-                                    <div class="card-content">
-                                        <div class="card-content-inner"> <img src="img/MediaArt.jpg" width="100%">
-                                            <p class="color-gray">Arts/Media</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-50">
-                            <div class="card ks-facebook-card">
-                                <a href="list_work.html">
-                                    <div class="card-content">
-                                        <div class="card-content-inner"> <img src="img/gomen.jpg" width="100%">
-                                            <p class="color-gray">Government</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-50">
-                            <div class="card ks-facebook-card">
-                                <a href="list_work.html">
-                                    <div class="card-content">
-                                        <div class="card-content-inner"> <img src="img/jambatan.jpg" width="100%">
-                                            <p class="color-gray">Architecture & Design</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-50">
-                            <div class="card ks-facebook-card">
-                                <a href="list_work.html">
-                                    <div class="card-content">
-                                        <div class="card-content-inner"> <img src="img/technical.jpg" width="100%">
-                                            <p class="color-gray">Technician</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-50">
-                            <div class="card ks-facebook-card">
-                                <a href="list_work.html">
-                                    <div class="card-content">
-                                        <div class="card-content-inner"> <img src="img/sales.jpg" width="100%">
-                                            <p class="color-gray">Sales & Marketing</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-50">
-                            <div class="card ks-facebook-card">
-                                <a href="list_work.html">
-                                    <div class="card-content">
-                                        <div class="card-content-inner"> <img src="img/tourism.jpg" width="100%">
-                                            <p class="color-gray">Tourism</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-50">
-                            <div class="card ks-facebook-card">
-                                <a href="list_worker.html">
-                                    <div class="card-content">
-                                        <div class="card-content-inner"> <img src="img/MediaArt.jpg" width="100%">
-                                            <p class="color-gray">Arts/Media</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
---></div>
-                <!--
-                <form data-search-list=".list-block-search" data-search-in=".item-title" class="searchbar searchbar-init">
-                    <div class="searchbar-input">
-                        <input type="search" placeholder="Search">
-                        <a href="#" class="searchbar-clear"></a>
-                    </div><a href="#" class="searchbar-cancel">Cancel</a> </form>
-                 Search Bar overlay 
-                <div class="searchbar-overlay"></div>
--->
+                </div>
                 <div class="page-content" style="padding:0;height: auto;margin-bottom: 80px;">
-                    <!-- This block will be displayed if nothing found -->
-                    <div class="content-block searchbar-not-found">
-                        <div class="content-block-inner">Nothing found</div>
-                    </div>
                     <!-- This block will be displayed if anything found, and this list block is used a searbar target -->
                     <div class="list-block list-block-search searchbar-found media-list pending-order-list" style="margin:0">
                         <div class="col-100">
-                            <p style="color:#333;"><span class="new-order" style="font-size: 18px;">Feeds</p>
+                            <p style="color:#333;"><span style="font-size: 18px;">Feeds</span></p>
                         </div>
                         <ul>
                             <li style="border-bottom:1px solid lightgray">
                                 <a href="#" class="item-link item-content">
-                                    <div class="item-media"><img src="img/product3.jpg" width="80"><span class="badge order-status" style="color:#5a5a5a; position: absolute; height: 20px; line-height: 20px; text-align: center; left: 8px;top: 9px; background: #ff5722;color:#fff;font-weight:bold">New</span></div>
-                        <div class="item-inner">
-                            <div class="item-title-row" style="padding-right:0">
-                                <div class="order-id" style="text-align:left">#OBE5678</div>
-                                <div class="chip" style="margin-top:-10px;margin-right:-10px;">
-                                    <div class="chip-media"><img src="http://lorempixel.com/100/100/people/9/"></div>
-                                    <div class="chip-label agent-chip">Jane Doe</div>
-                                </div>
-                            </div>
-                            <div class="order-from"><b>Siti Payung</b></div>
-                            <div class="item-title-row" style="padding-right:0">
-                                <div class="item-quantity"><b>1x</b></div>
-                                <div class="item-title">Jam Tangan Murah</div>
-                            </div>
-                            <div class="item-title-row" style="padding-right:0">
-                                <div class="order-date">23/05/2017</div>
-                                <div class="total-price" style="color:#ff5722;text-align:right;font-weight:bold">RM20</div>
-                            </div>
-                        </div>
-                        </a>
-                        </li>
-                        <li style="border-bottom:1px solid lightgray">
-                            <a href="#" class="item-link item-content">
-                                <div class="item-media"><img src="img/product2.jpg" width="80"><span class="badge order-status" style="color:#5a5a5a; position: absolute; height: 20px; line-height: 20px; text-align: center; left: 8px;top: 9px; background: #ff5722;color:#fff;font-weight:bold">New</span></div>
-                                <div class="item-inner">
-                                    <div class="item-title-row" style="padding-right:0">
-                                        <div class="order-id" style="text-align:left">#OBE1234</div>
-                                        <div class="chip" style="margin-top:-10px;margin-right:-10px;">
-                                            <div class="chip-media"><img src="http://lorempixel.com/100/100/people/10/"></div>
-                                            <div class="chip-label agent-chip">John Doe</div>
-                                        </div>
-                                    </div>
-                                    <div class="order-from"><b>Ahmad Albab</b></div>
-                                    <div class="item-title-row" style="padding-right:0">
-                                        <div class="item-quantity"><b>1x</b></div>
-                                        <div class="item-title">Awning Wira</div>
-                                    </div>
-                                    <div class="item-title-row" style="padding-right:0">
-                                        <div class="order-date">15/05/2017</div>
-                                        <div class="total-price" style="color:#ff5722;text-align:right;font-weight:bold">RM80</div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
+                                    <div class="item-media"><img src="img/gambar1.jpg" width="44" style="margin-top: 5px;"><span style="margin-left:8px;">Razak sent you an order</span></div><span class="trigger-actionsheet" style="float:right;"><i class="material-icons" style="margin-right:16px;color:#777">&#xE5D3;</i></span> </a>
+                            </li>
+                            <li style="border-bottom:1px solid lightgray">
+                                <a href="#" class="item-link item-content">
+                                    <div class="item-media"><img src="img/gambar2.jpg" width="44" style="margin-top: 5px;"><span style="margin-left:8px;">Ahmad created new product</span></div><span class="trigger-actionsheet" style="float:right;"><i class="material-icons" style="margin-right:16px;color:#777">&#xE5D3;</i></span> </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -251,7 +70,7 @@
                                             <div class="item-title">Cashier</div>
                                             <div class="item-after" style="margin-left: 0;">20 Dec 2016</div>
                                         </div>
-                                        <div class="item-subtitle"><span class="badge" style="background: rgba(255, 255, 255, 0); border: 1px #e00472 solid; border-radius: 3px; color: #e00472;">new</span></div>
+                                        <div class="item-subtitle"><span class="badge" style="background: rgba(255, 255, 255, 0); border: 1px #e00472 solid; border-radius: 3px; color: #e00472;">new</span> </div>
                                     </div>
                                 </a>
                                 <div class="accordion-item-content" style="">

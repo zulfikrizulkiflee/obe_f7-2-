@@ -165,7 +165,7 @@ ARTICLE
 
 .article-title,
 .profile-info {
-    width: max-content;
+    width: calc(100vw - 52px);
     padding: 0px 16px;
     margin: 1em 0;
     font-size: 16px;
@@ -462,9 +462,17 @@ p.color-gray {
 
 .card {
     background: #f6f6f6;
-    margin: 3px;
+    margin: 0 16px 0;
     border-radius: 0;
     box-shadow: none;
+}
+
+.product-left{
+    margin: 0 8px 0 16px;
+}
+
+.product-right{
+    margin: 0 16px 0 8px;
 }
 
 .swiper-pagination-fraction,
@@ -486,8 +494,8 @@ p.color-gray {
 }
 
 .navbar-inner.opacity-container-top {
-    background-image: -webkit-linear-gradient(top, transparent, rgba(0, 0, 0, 0.5));
-    background-image: linear-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5));
+    background-image: -webkit-linear-gradient(top, transparent, rgba(0, 0, 0, 0.8));
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8));
     color: #fff;
     margin: 0;
     position: absolute;

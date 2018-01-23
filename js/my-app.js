@@ -217,6 +217,42 @@ myApp.onPageInit('home', function (page) {
             }
         }
     });
+    $$('.trigger-actionsheet').on('click', function () {
+        var buttons = [
+            {
+                text: '<i class="icon material-icons" style="margin-right:8px;color:#777;">&#xE8A0;</i>Open'
+        }, {
+                text: '<i class="icon material-icons" style="margin-right:8px;color:#777;">&#xE7FD;</i>View User'
+        }
+            , {
+                text: '<i class="icon material-icons" style="margin-right:8px;color:#777;">&#xE92B;</i>Remove'
+                , color: 'red'
+        }
+    , ];
+        myApp.actions(buttons);
+    });
+    $$('.open-vertical-modal').on('click', function () {
+        myApp.modal({
+            title: 'Add product from'
+            , verticalButtons: true
+            , buttons: [
+                {
+                    text: 'Camera'
+                    , onClick: function () {
+                        myApp.alert('You clicked camera!')
+                        mainView.router.loadPage('new-product.html');
+                    }
+      }
+                , {
+                    text: 'Photos'
+                    , onClick: function () {
+                        myApp.alert('You clicked photos!')
+                        mainView.router.loadPage('new-product.html');
+                    }
+      }
+    , ]
+        })
+    });
 });
 var tabClick;
 myApp.onPageInit('profile', function (page) {
@@ -253,6 +289,35 @@ myApp.onPageInit('my-purchase', function (page) {
     }
     $$('.mypurchase-tab-content .tab').on('show', function () {
         alert("yes");
+    });
+});
+var ind = 1;
+myApp.onPageInit('new-product', function (page) {
+    $$('.variation-show').hide();
+    $$('.back-modal').on('click', function () {
+        myApp.confirm('Discard this product?','', function () {
+            myApp.alert('You clicked Ok button');
+        }, function () {
+            myApp.alert('You clicked Cancel button');
+        });
+    });
+    
+    $$('.variation-add').on('click', function(){
+        var varStr = '<li class="variation-show" data-seq="var_'+ind+'"> <div class="item-content"> <div class="item-media" data-section="variation-field" onclick="removeVar(\'var_'+ind+'\');" style="align-self: auto;margin-top: 30px;"><i class="icon material-icons">&#xE15C;</i></div> <div class="item-inner"> <ul style="padding: 0;"> <li> <div class="item-content" style="padding:0;"> <div class="item-media"><i class="icon material-icons">&#xE3DE;</i></div> <div class="item-inner"> <div class="item-title floating-label">Type</div> <div class="item-input"> <input type="text" name="variant-'+ind+'-type" placeholder="Type"> </div> </div> </div> </li> <li> <div class="item-content" style="padding:0;"> <div class="item-media"><i class="icon material-icons">attach_money</i></div> <div class="item-inner"> <div class="item-title floating-label">Price</div> <div class="item-input"> <input class="variation-price" type="number" name="variant-'+ind+'-price" placeholder="Price"> </div> </div> </div> </li> <li> <div class="item-content" style="padding:0;"> <div class="item-media"><i class="icon material-icons">&#xE53B;</i></div> <div class="item-inner"> <div class="item-title floating-label">Stock</div> <div class="item-input"> <input type="number" name="variant-'+ind+'-stock" placeholder="Stock"> </div> </div> </div> </li> </ul> </div> </div> </li>';
+        $$('.variation-hide').hide();
+        $('.variation-list').before(varStr);
+        var varPrice = $$('input[name=variation-price-main]').val();
+        if(varPrice){
+            $$('input.variation-price').parent().addClass('not-empty-state');
+            $$('input.variation-price').parent().parent().addClass('not-empty-state');
+            $$('input.variation-price').val(varPrice).addClass('not-empty-state');
+            $$('input.variation-price').removeClass('variation-price');
+        }
+        $$('.variation-show').show();
+        ind++;
+    });
+    $$('.product-save').on('click', function(){
+        myApp.alert('You save a product');
     });
 });
 myApp.onPageInit('photos', function (page) {
@@ -357,6 +422,15 @@ function IsJsonString(str) {
         return false;
     }
     return true;
+}
+
+function removeVar(seq) {
+    var target = "[data-seq="+seq+"]";
+    if ($$('.variation-show').length == 1){
+        $$('.variation-hide').show();
+    }
+    $(target).remove();
+    ind--;
 }
 
 function cari() {
