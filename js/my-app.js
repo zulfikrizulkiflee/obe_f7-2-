@@ -296,14 +296,12 @@ myApp.onPageInit('new-product', function (page) {
     $$('.variation-show').hide();
     $$('.back-modal').on('click', function () {
         myApp.confirm('Discard this product?','', function () {
-            myApp.alert('You clicked Ok button');
-        }, function () {
-            myApp.alert('You clicked Cancel button');
+            mainView.router.loadPage('home.html');
         });
     });
     
     $$('.variation-add').on('click', function(){
-        var varStr = '<li class="variation-show" data-seq="var_'+ind+'"> <div class="item-content"> <div class="item-media" data-section="variation-field" onclick="removeVar(\'var_'+ind+'\');" style="align-self: auto;margin-top: 30px;"><i class="icon material-icons">&#xE15C;</i></div> <div class="item-inner"> <ul style="padding: 0;"> <li> <div class="item-content" style="padding:0;"> <div class="item-media"><i class="icon material-icons">&#xE3DE;</i></div> <div class="item-inner"> <div class="item-title floating-label">Type</div> <div class="item-input"> <input type="text" name="variant-'+ind+'-type" placeholder="Type"> </div> </div> </div> </li> <li> <div class="item-content" style="padding:0;"> <div class="item-media"><i class="icon material-icons">attach_money</i></div> <div class="item-inner"> <div class="item-title floating-label">Price</div> <div class="item-input"> <input class="variation-price" type="number" name="variant-'+ind+'-price" placeholder="Price"> </div> </div> </div> </li> <li> <div class="item-content" style="padding:0;"> <div class="item-media"><i class="icon material-icons">&#xE53B;</i></div> <div class="item-inner"> <div class="item-title floating-label">Stock</div> <div class="item-input"> <input type="number" name="variant-'+ind+'-stock" placeholder="Stock"> </div> </div> </div> </li> </ul> </div> </div> </li>';
+        var varStr = '<li class="variation-show" data-seq="var_'+ind+'"> <div class="item-content"> <div class="item-media" data-section="variation-field" onclick="removeVar(\'var_'+ind+'\');" style="align-self: auto;margin-top: 30px;"><i class="icon material-icons">&#xE15C;</i></div> <div class="item-inner"> <ul style="padding: 0;"> <li> <div class="item-content" style="padding:0;"> <div class="item-media"><i class="icon material-icons">&#xE3DE;</i></div> <div class="item-inner"> <div class="item-title floating-label">Type</div> <div class="item-input"> <input type="text" name="variant-'+ind+'-type" placeholder="Type"> </div> </div> </div> </li> <li> <div class="item-content" style="padding:0;"> <div class="item-media"><i class="icon material-icons">&#xE227;</i></div> <div class="item-inner"> <div class="item-title floating-label">Price</div> <div class="item-input"> <input class="variation-price" type="number" name="variant-'+ind+'-price" placeholder="Price"> </div> </div> </div> </li> <li> <div class="item-content" style="padding:0;"> <div class="item-media"><i class="icon material-icons">&#xE53B;</i></div> <div class="item-inner"> <div class="item-title floating-label">Stock</div> <div class="item-input"> <input type="number" name="variant-'+ind+'-stock" placeholder="Stock"> </div> </div> </div> </li> </ul> </div> </div> </li>';
         $$('.variation-hide').hide();
         $('.variation-list').before(varStr);
         var varPrice = $$('input[name=variation-price-main]').val();
