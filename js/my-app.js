@@ -318,6 +318,13 @@ myApp.onPageInit('new-product', function (page) {
         myApp.alert('You save a product');
     });
 });
+myApp.onPageInit('wholesale', function (page) {
+    $$('.price-tier-remove').each(function(){
+       $(this).on('click',function(){
+           
+       });
+    });
+});
 myApp.onPageInit('photos', function (page) {
     $$('i.material-icons.fav').on('click', function (e) { //Changing color icons onclick
         $$(this).toggleClass('color-change');
