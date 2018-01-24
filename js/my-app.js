@@ -291,7 +291,7 @@ myApp.onPageInit('my-purchase', function (page) {
         alert("yes");
     });
 });
-var ind = 1;
+var indVar = 1;
 myApp.onPageInit('new-product', function (page) {
     $$('.variation-show').hide();
     $$('.back-modal').on('click', function () {
@@ -301,7 +301,7 @@ myApp.onPageInit('new-product', function (page) {
     });
     
     $$('.variation-add').on('click', function(){
-        var varStr = '<li class="variation-show" data-seq="var_'+ind+'"> <div class="item-content"> <div class="item-media" data-section="variation-field" onclick="removeVar(\'var_'+ind+'\');" style="align-self: auto;margin-top: 30px;"><i class="icon material-icons">&#xE15C;</i></div> <div class="item-inner"> <ul style="padding: 0;"> <li> <div class="item-content" style="padding:0;"> <div class="item-media"><i class="icon material-icons">&#xE3DE;</i></div> <div class="item-inner"> <div class="item-title floating-label">Type</div> <div class="item-input"> <input type="text" name="variant-'+ind+'-type" placeholder="Type"> </div> </div> </div> </li> <li> <div class="item-content" style="padding:0;"> <div class="item-media"><i class="icon material-icons">&#xE227;</i></div> <div class="item-inner"> <div class="item-title floating-label">Price</div> <div class="item-input"> <input class="variation-price" type="number" name="variant-'+ind+'-price" placeholder="Price"> </div> </div> </div> </li> <li> <div class="item-content" style="padding:0;"> <div class="item-media"><i class="icon material-icons">&#xE53B;</i></div> <div class="item-inner"> <div class="item-title floating-label">Stock</div> <div class="item-input"> <input type="number" name="variant-'+ind+'-stock" placeholder="Stock"> </div> </div> </div> </li> </ul> </div> </div> </li>';
+        var varStr = '<li class="variation-show var_'+indVar+'"> <div class="item-content"> <div class="item-media" data-section="variation-field" onclick="removeVar(\'.var_'+indVar+'\');" style="align-self: auto;margin-top: 30px;"><i class="icon material-icons">&#xE15C;</i></div> <div class="item-inner"> <ul style="padding: 0;"> <li> <div class="item-content" style="padding:0;"> <div class="item-media"><i class="icon material-icons">&#xE3DE;</i></div> <div class="item-inner"> <div class="item-title floating-label">Type</div> <div class="item-input"> <input type="text" name="variant-'+indVar+'-type" placeholder="Type"> </div> </div> </div> </li> <li> <div class="item-content" style="padding:0;"> <div class="item-media"><i class="icon material-icons">&#xE227;</i></div> <div class="item-inner"> <div class="item-title floating-label">Price</div> <div class="item-input"> <input class="variation-price" type="number" name="variant-'+indVar+'-price" placeholder="Price"> </div> </div> </div> </li> <li> <div class="item-content" style="padding:0;"> <div class="item-media"><i class="icon material-icons">&#xE53B;</i></div> <div class="item-inner"> <div class="item-title floating-label">Stock</div> <div class="item-input"> <input type="number" name="variant-'+indVar+'-stock" placeholder="Stock"> </div> </div> </div> </li> </ul> </div> </div> </li>';
         $$('.variation-hide').hide();
         $('.variation-list').before(varStr);
         var varPrice = $$('input[name=variation-price-main]').val();
@@ -312,16 +312,29 @@ myApp.onPageInit('new-product', function (page) {
             $$('input.variation-price').removeClass('variation-price');
         }
         $$('.variation-show').show();
-        ind++;
+        indVar++;
     });
     $$('.product-save').on('click', function(){
         myApp.alert('You save a product');
     });
 });
+var indTier = 1;
 myApp.onPageInit('wholesale', function (page) {
+    $$('.back-modal').on('click', function () {
+        myApp.confirm('Discard price tier?','', function () {
+            mainView.router.back();
+        });
+    });
     $$('.price-tier-remove').each(function(){
-       $(this).on('click',function(){
+       $$(this).on('click',function(){
            
+       });
+    });
+    $$('.price-tier-add').each(function(){
+       $$(this).on('click',function(){
+           var tierStr = '<div class="row tier_'+indTier+'"> <div style="width:12%"><i class="icon material-icons price-tier-remove" onclick="removeTier(\'.tier_'+indTier+'\')" style="line-height: 37px;">&#xE15C;</i></div> <div style="width:28%"> <div class="item-input" style="margin: 2px 10px; border: 1px solid #afafaf; border-radius: 5px; padding: 5px;"> <input type="number" style="border: none; width: 100%; text-align: center;"> </div> </div> <div style="width:2%;line-height: 35px;">-</div> <div style="width:28%"> <div class="item-input" style="margin: 2px 10px; border: 1px solid #afafaf; border-radius: 5px; padding: 5px;"> <input type="number" style="border: none; width: 100%; text-align: center;"> </div> </div> <div style="width:2%;line-height: 35px;">:</div> <div style="width:28%"> <div class="item-input" style="margin: 2px 10px; border: 1px solid #afafaf; border-radius: 5px; padding: 5px;"> <input type="number" style="border: none; width: 100%; text-align: center;"> </div> </div> </div> </div>';
+           $$('.price-tier-container').append(tierStr);
+           indTier++;
        });
     });
 });
@@ -429,13 +442,17 @@ function IsJsonString(str) {
     return true;
 }
 
-function removeVar(seq) {
-    var target = "[data-seq="+seq+"]";
+function removeVar(target) {
     if ($$('.variation-show').length == 1){
         $$('.variation-hide').show();
     }
     $(target).remove();
-    ind--;
+    indVar--;
+}
+
+function removeTier(target) {
+    $(target).remove();
+    indTier--;
 }
 
 function cari() {
