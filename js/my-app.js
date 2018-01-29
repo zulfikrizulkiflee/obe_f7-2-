@@ -69,10 +69,12 @@ $$(document).on('click', '#login-btn', function () {
     myApp.showIndicator();
     if ($$('[name=user_name]').val() == "" || $$('[name=user_password]').val() == "") {
         myModal('Login Error!', 'Empty Username/Password');
+        myApp.hideIndicator();
         return;
     }
     $$('#login-form').trigger('submit');
     var formData = myApp.formToJSON('#login-form');
+    myApp.showIndicator();
     $$.get(api_user + 'login', $$.serializeObject(formData), function (response) {
         var response = extractAJAX(response);
         if (response.status == true) {
@@ -172,6 +174,7 @@ $$('#avatarCapture').on('change', gotPic);
 $$('i.material-icons.fav').on('click', function (e) { //Changing color icons onclick
     $$(this).toggleClass('color-change');
 });
+// PAGES FUNCTION
 myApp.onPageInit('home', function (page) {
     var obe_id = localStorage.getItem('OBE_obe_id');
     if (obe_id != null) {
@@ -181,8 +184,6 @@ myApp.onPageInit('home', function (page) {
     else {
         mainView.router.loadPage('login.html');
     }
-}).trigger();
-myApp.onPageInit('home', function (page) {
     $$('.refresh-page').on('click', function () {
         page.view.router.refreshPage();
     });
@@ -253,7 +254,22 @@ myApp.onPageInit('home', function (page) {
     , ]
         })
     });
-});
+    $$.get(api_product + 'brandcards&obe-id=' + localStorage.getItem('OBE_obe_id'), function (response) {
+        var response = extractAJAX(response);
+        if (response.status == true) {
+            $$('.brand-cards').html("");
+            $.each(response.data, function (i, v) {
+                if (v.product_count > 0) {
+                    var brandStr = '<div class="card ks-card-header-pic brand-card-row" style="margin-bottom:15px;"> <div class="navbar article"> <div class="navbar-inner opacity-container-top"> <div class="center">' + v.brand_name + '</div> <div class="right"> <a href="#" class="link icon-only"> <i class="material-icons fav">favorite</i> </a> <a href="#" class="link icon-only"> <i class="material-icons">book</i> </a> </div> </div> </div> <div class="header-container" style="margin-top: -53px;"> <a href="brand-page.html?brand-id='+v.brand_id+'"> <div style="background-image:url(img/fleur.jpg)" valign="bottom" class="card-header color-white no-border"></div> </a> </div> <div class="card-footer"> <div class="item-media"><img src="img/gambar2.jpg" width="44" style="margin-top: 5px;"> </div> <div class="item-inner" style="margin-left: 20px;"> <div class="row no-gutter" style="text-align: left;"> <div class="col-100 info" style="text-align: left;font-weight:;font-size: 3vmin;margin-bottom: -10px; color: grey;">Aizal Manan</div> <div class="row" style="padding-top:10px;text-align: left;font-size:1vmin;margin-bottom: 5px;"> <div class="col-10" style="text-align: left;"> <i class="material-icons small-rating">star</i> </div> <div class="col-10" style="text-align: left;"> <i class="material-icons small-rating">star</i> </div> <div class="col-10" style="text-align: left;"> <i class="material-icons small-rating">star</i> </div> <div class="col-10" style="text-align: left;"> <i class="material-icons small-rating">star</i> </div> <div class="col-10" style="text-align: left;"> <i class="material-icons small-unrating">star</i> </div> <div class="col-10" style="text-align: left;"> </div> <div class="col-40" style="text-align: left;"> <div style="font-size: 3vmin;color: grey;line-height: 3vmin;font-weight: lighter;">(Ratings)</div> </div> </div> </div> </div> <div class="icon-social"> <div class="link icon-only" style="color: green; padding-right: 15px; font-size: 4vmin;">' + v.product_count + ' Products</div> </div> </div> </div>';
+                    $$('.brand-cards').append(brandStr);
+                }
+            });
+        }
+        if($$('.brand-card-row').length == 0){
+            $$('.brand-title').hide();
+        }
+    });
+}).trigger();
 var tabClick;
 myApp.onPageInit('profile', function (page) {
     $$('i.material-icons.fav').on('click', function (e) { //Changing color icons onclick
@@ -292,20 +308,38 @@ myApp.onPageInit('my-purchase', function (page) {
     });
 });
 var indVar = 1;
+var wholesaleJSON = [];
 myApp.onPageInit('new-product', function (page) {
+    if (page.query.brand_name) {
+        $$('.brand-name').html(page.query.brand_name);
+        $('input[name=brand-id]').val(page.query.brand_id)
+    }
+    $$.get(api_product + 'categorylist', function (response) {
+        var response = extractAJAX(response);
+        if (response.status == true) {
+            $$('.product-category-list').html("");
+            $.each(response.data, function (i, v) {
+                var catStr = '<option value="' + v.category_id + '">' + v.category_name + '</option>';
+                $$('.product-category-list').append(catStr);
+            });
+        }
+        else {
+            myModal('Error!', response.data);
+        }
+    });
     $$('.variation-show').hide();
-    $$('.back-modal').on('click', function () {
-        myApp.confirm('Discard this product?','', function () {
+    $('[data-page=new-product] .back-modal').on('click', function () {
+        myApp.confirm('Discard this product?', '', function () {
             mainView.router.loadPage('home.html');
         });
     });
-    
-    $$('.variation-add').on('click', function(){
-        var varStr = '<li class="variation-show var_'+indVar+'"> <div class="item-content"> <div class="item-media" data-section="variation-field" onclick="removeVar(\'.var_'+indVar+'\');" style="align-self: auto;margin-top: 30px;"><i class="icon material-icons">&#xE15C;</i></div> <div class="item-inner"> <ul style="padding: 0;"> <li> <div class="item-content" style="padding:0;"> <div class="item-media"><i class="icon material-icons">&#xE3DE;</i></div> <div class="item-inner"> <div class="item-title floating-label">Type</div> <div class="item-input"> <input type="text" name="variant-'+indVar+'-type" placeholder="Type"> </div> </div> </div> </li> <li> <div class="item-content" style="padding:0;"> <div class="item-media"><i class="icon material-icons">&#xE227;</i></div> <div class="item-inner"> <div class="item-title floating-label">Price</div> <div class="item-input"> <input class="variation-price" type="number" name="variant-'+indVar+'-price" placeholder="Price"> </div> </div> </div> </li> <li> <div class="item-content" style="padding:0;"> <div class="item-media"><i class="icon material-icons">&#xE53B;</i></div> <div class="item-inner"> <div class="item-title floating-label">Stock</div> <div class="item-input"> <input type="number" name="variant-'+indVar+'-stock" placeholder="Stock"> </div> </div> </div> </li> </ul> </div> </div> </li>';
+    $$('.variation-add').on('click', function () {
+        $$('input[name=variation-price-main]').removeClass('required');
+        var varStr = '<li class="variation-show var_' + indVar + '"> <div class="item-content"> <div class="item-media" data-section="variation-field" onclick="removeVar(\'.var_' + indVar + '\');" style="align-self: auto;margin-top: 30px;"><i class="icon material-icons">&#xE15C;</i></div> <div class="item-inner"> <ul style="padding: 0;"> <li> <div class="item-content" style="padding:0;"> <div class="item-media"><i class="icon material-icons">&#xE3DE;</i></div> <div class="item-inner"> <div class="item-title floating-label">Type</div> <div class="item-input"> <input type="text" class="variant-type required" placeholder="Type"> </div> </div> </div> </li> <li> <div class="item-content" style="padding:0;"> <div class="item-media"><i class="icon material-icons">&#xE227;</i></div> <div class="item-inner"> <div class="item-title floating-label">Price</div> <div class="item-input"> <input class="variation-price variant-price required" type="number" placeholder="Price"> </div> </div> </div> </li> <li> <div class="item-content" style="padding:0;"> <div class="item-media"><i class="icon material-icons">&#xE53B;</i></div> <div class="item-inner"> <div class="item-title floating-label">Stock</div> <div class="item-input"> <input type="number" class="variant-stock" placeholder="Stock"> </div> </div> </div> </li> </ul> </div> </div> </li>';
         $$('.variation-hide').hide();
         $('.variation-list').before(varStr);
         var varPrice = $$('input[name=variation-price-main]').val();
-        if(varPrice){
+        if (varPrice) {
             $$('input.variation-price').parent().addClass('not-empty-state');
             $$('input.variation-price').parent().parent().addClass('not-empty-state');
             $$('input.variation-price').val(varPrice).addClass('not-empty-state');
@@ -314,53 +348,146 @@ myApp.onPageInit('new-product', function (page) {
         $$('.variation-show').show();
         indVar++;
     });
-    $$('.product-save').on('click', function(){
-        myApp.alert('You save a product');
+    $$('.product-save').on('click', function () {
+        var counter = 0;
+        var required = $$('.required').length;
+        if ($$('.variation-show').length > 0) {
+            $$('[name=variation-price-main]').removeClass('required');
+        }
+        $$('.item-input .required').each(function () {
+            if ($$(this).val() == "") {
+                $$(this).closest('li').attr('style', 'background:#ff000030');
+            }
+            else {
+                counter++;
+                $$(this).closest('li').attr('style', 'background:#fff');
+            }
+        });
+        if (counter == required) {
+            myApp.confirm('Add product ?', '', function () {
+                myApp.showIndicator();
+                var variationJSON = [];
+                $$('.variation-show').each(function () {
+                    var data = '{"variation-type":"' + $(this).find('.variant-type').val() + '", "variation-price":"' + $(this).find('.variant-price').val() + '", "variation-stock":"' + $(this).find('.variant-stock').val() + '"}'
+                    variationJSON.push(data);
+                });
+                $$.get(api_product + 'addproduct&obe-id=' + localStorage.getItem('OBE_obe_id') + '&' + $('#new-product-form').serialize() + "&product-variant=[" + variationJSON + "]&wholesale=[" + wholesaleJSON + "]&product-image=photo", function (response) {
+                    var response = extractAJAX(response);
+                    if (response.status == true) {
+                        myApp.confirm('Add another product ?', response.data, function () {
+                            mainView.router.reloadPage('new-product.html');
+                        }, function () {
+                            mainView.router.loadPage('home.html');
+                        });
+                    }
+                    else {
+                        myModal('Error!', response.data);
+                    }
+                    myApp.hideIndicator();
+                });
+            });
+        }
+        else {
+            myApp.hideIndicator();
+        }
     });
 });
-var indTier = 1;
-myApp.onPageInit('wholesale', function (page) {
+myApp.onPageInit('my-brand', function (page) {
+    $$.get(api_product + 'brandlist', function (response) {
+        var response = extractAJAX(response);
+        if (response.status == true) {
+            $$('.my-brand-list').html("");
+            $.each(response.data, function (i, v) {
+                var brandStr = '<li style="border-bottom:1px solid lightgray"> <a href="#" class="item-link item-content brand-cta" data-brand-id="' + v.brand_id + '"> <div class="item-media"><img src="img/gambar1.jpg" width="44" style="margin-top: 5px;"><span style="margin-left:8px;">' + v.brand_name + '</span></div></a> </li>';
+                $$('.my-brand-list').append(brandStr);
+            });
+        }
+        else {
+            var brandStr = '<li style="border-bottom:1px solid lightgray"> <a href="#" class="item-link item-content"> <span style="margin-left:8px;">' + response.data + '</span></a> </li>';
+            $$('.my-brand-list').append(brandStr);
+        }
+        $$('.brand-cta').each(function () {
+            $$(this).on('click', function () {
+                var brand_id = $$(this).attr('data-brand-id');
+                var brand_name = $(this).children().find('span').html();
+                mainView.router.loadPage('new-product.html?brand_id=' + brand_id + '&brand_name=' + brand_name);
+            });
+        });
+    });
+});
+myApp.onPageInit('brand-new-add', function (page) {
     $$('.back-modal').on('click', function () {
-        myApp.confirm('Discard price tier?','', function () {
+        myApp.confirm('Discard this brand?', '', function () {
             mainView.router.back();
         });
     });
-    $$('.price-tier-remove').each(function(){
-       $$(this).on('click',function(){
-           
-       });
-    });
-    $$('.price-tier-add').each(function(){
-       $$(this).on('click',function(){
-           var tierStr = '<div class="row tier_'+indTier+'"> <div style="width:12%"><i class="icon material-icons price-tier-remove" onclick="removeTier(\'.tier_'+indTier+'\')" style="line-height: 37px;">&#xE15C;</i></div> <div style="width:28%"> <div class="item-input" style="margin: 2px 10px; border: 1px solid #afafaf; border-radius: 5px; padding: 5px;"> <input type="number" style="border: none; width: 100%; text-align: center;"> </div> </div> <div style="width:2%;line-height: 35px;">-</div> <div style="width:28%"> <div class="item-input" style="margin: 2px 10px; border: 1px solid #afafaf; border-radius: 5px; padding: 5px;"> <input type="number" style="border: none; width: 100%; text-align: center;"> </div> </div> <div style="width:2%;line-height: 35px;">:</div> <div style="width:28%"> <div class="item-input" style="margin: 2px 10px; border: 1px solid #afafaf; border-radius: 5px; padding: 5px;"> <input type="number" style="border: none; width: 100%; text-align: center;"> </div> </div> </div> </div>';
-           $$('.price-tier-container').append(tierStr);
-           indTier++;
-       });
+    $$('.brand-save').on('click', function () {
+        var counter = 0;
+        var required = $$('.required').length;
+        $$('.item-input .required').each(function () {
+            if ($$(this).val() == "") {
+                $$(this).closest('li').attr('style', 'background:#ff000030');
+            }
+            else {
+                counter++;
+                $$(this).closest('li').attr('style', 'background:#fff');
+            }
+        });
+        if (counter == required) {
+            myApp.confirm('Add brand ?', '', function () {
+                myApp.showIndicator();
+                $$.get(api_product + 'addbrand&obe-id=' + localStorage.getItem('OBE_obe_id') + '&' + $('#new-brand-form').serialize(), function (response) {
+                    var response = extractAJAX(response);
+                    if (response.status == true) {
+                        myApp.alert('Successfully created brand', '');
+                        mainView.router.reloadPage('my-brand.html');
+                    }
+                    else {
+                        myModal('Error!', response.data);
+                    }
+                    myApp.hideIndicator();
+                });
+            });
+        }
+        else {
+            myApp.hideIndicator();
+        }
     });
 });
-myApp.onPageInit('photos', function (page) {
-    $$('i.material-icons.fav').on('click', function (e) { //Changing color icons onclick
-        $$(this).toggleClass('color-change');
+var indTier = 2;
+myApp.onPageInit('wholesale', function (page) {
+    if (wholesaleJSON.length != 0) {
+        $$('.price-tier-container').html("");
+        var indTier = 2;
+        var whStr = JSON.stringify(wholesaleJSON);
+        $.each(wholesaleJSON, function (i, v) {
+            var whStr = JSON.parse(v);
+            console.log(whStr);
+            var tierStr = '<div class="row price-tier-row tier_' + indTier + '"> <div style="width:12%"><i class="icon material-icons price-tier-remove" onclick="removeTier(\'.tier_' + indTier + '\')" style="line-height: 37px;">&#xE15C;</i></div> <div style="width:28%"> <div class="item-input" style="margin: 2px 10px; border: 1px solid #afafaf; border-radius: 5px; padding: 5px;"> <input type="number" value="' + whStr.minorder + '" class="ws-input min-order" style="border: none; width: 100%; text-align: center;"> </div> </div> <div style="width:2%;line-height: 35px;">-</div> <div style="width:28%"> <div class="item-input" style="margin: 2px 10px; border: 1px solid #afafaf; border-radius: 5px; padding: 5px;"> <input type="number" value="' + whStr.maxorder + '" class="ws-input max-order"style="border: none; width: 100%; text-align: center;"> </div> </div> <div style="width:2%;line-height: 35px;">:</div> <div style="width:28%"> <div class="item-input" style="margin: 2px 10px; border: 1px solid #afafaf; border-radius: 5px; padding: 5px;"> <input type="number" value="' + whStr.unitprice + '" class="ws-input unit-price" style="border: none; width: 100%; text-align: center;"> </div> </div> </div> </div>';
+            $$('.price-tier-container').append(tierStr);
+            indTier++;
+        });
+    }
+    $$('.price-tier-save').on('click', function () {
+        wholesaleJSON = [];
+        $$('.price-tier-row').each(function () {
+            var data = '{"minorder":"' + $(this).find('.min-order').val() + '", "maxorder":"' + $(this).find('.max-order').val() + '", "unitprice":"' + $(this).find('.unit-price').val() + '"}';
+            wholesaleJSON.push(data);
+        });
+        mainView.router.back();
+        if ($$('.price-tier-row').length > 0) {
+            $$('.wholesale-detail').html(">=" + $('.price-tier-container').first('.price-tier-row').find('.min-order').val() + " price RM" + $('.price-tier-container').first('.price-tier-row').find('.unit-price').val());
+        }
+        else {
+            $$('.wholesale-detail').html("");
+        }
     });
-});
-myApp.onPageInit('videos', function (page) {
-    $$('i.material-icons.fav').on('click', function (e) { //Changing color icons onclick
-        $$(this).toggleClass('color-change');
-    });
-});
-myApp.onPageInit('musiques', function (page) {
-    $$('i.material-icons.fav').on('click', function (e) { //Changing color icons onclick
-        $$(this).toggleClass('color-change');
-    });
-});
-myApp.onPageInit('index2', function (page) {
-    $$('i.material-icons.fav').on('click', function (e) { //Changing color icons onclick
-        $$(this).toggleClass('color-change');
-    });
-});
-myApp.onPageInit('article', function (page) {
-    $$('i.material-icons.fav-article').on('click', function () { //Changing color icons onclick
-        $$(this).toggleClass('color-change');
+    $$('.price-tier-add').each(function () {
+        $$(this).on('click', function () {
+            var tierStr = '<div class="row price-tier-row tier_' + indTier + '"> <div style="width:12%"><i class="icon material-icons price-tier-remove" onclick="removeTier(\'.tier_' + indTier + '\')" style="line-height: 37px;">&#xE15C;</i></div> <div style="width:28%"> <div class="item-input" style="margin: 2px 10px; border: 1px solid #afafaf; border-radius: 5px; padding: 5px;"> <input type="number" class="min-order" style="border: none; width: 100%; text-align: center;"> </div> </div> <div style="width:2%;line-height: 35px;">-</div> <div style="width:28%"> <div class="item-input" style="margin: 2px 10px; border: 1px solid #afafaf; border-radius: 5px; padding: 5px;"> <input type="number"  class="max-order"style="border: none; width: 100%; text-align: center;"> </div> </div> <div style="width:2%;line-height: 35px;">:</div> <div style="width:28%"> <div class="item-input" style="margin: 2px 10px; border: 1px solid #afafaf; border-radius: 5px; padding: 5px;"> <input type="number" class="unit-price" style="border: none; width: 100%; text-align: center;"> </div> </div> </div> </div>';
+            $$('.price-tier-container').append(tierStr);
+            indTier++;
+        });
     });
 });
 myApp.onPageInit('notifications', function (page) { //Change icon when add or delete person
@@ -369,51 +496,6 @@ myApp.onPageInit('notifications', function (page) { //Change icon when add or de
     });
     $$(document).on('click', 'i.material-icons.done', function () {
         $(this).replaceWith('<div class="item-after"><i class="material-icons add">&#xE7FE;</i></div>');
-    });
-});
-myApp.onPageInit('followers', function (page) { //Change icon when add or delete person
-    $$(document).on('click', 'i.material-icons.add', function () {
-        $(this).replaceWith('<div class="item-after"><i class="material-icons done">done</i></div>');
-    });
-    $$(document).on('click', 'i.material-icons.done', function () {
-        $(this).replaceWith('<div class="item-after"><i class="material-icons add">&#xE7FE;</i></div>');
-    });
-});
-myApp.onPageInit('following', function (page) { //Change icon when add or delete person
-    $$(document).on('click', 'i.material-icons.add', function () {
-        $(this).replaceWith('<div class="item-after"><i class="material-icons done">done</i></div>');
-    });
-    $$(document).on('click', 'i.material-icons.done', function () {
-        $(this).replaceWith('<div class="item-after"><i class="material-icons add">&#xE7FE;</i></div>');
-    });
-});
-myApp.onPageInit('index2', function (page) { //Change icon when add or delete person
-    $$(document).on('click', 'i.material-icons.add', function () {
-        $(this).replaceWith('<div class="item-after"><i class="material-icons done">done</i></div>');
-    });
-    $$(document).on('click', 'i.material-icons.done', function () {
-        $(this).replaceWith('<div class="item-after"><i class="material-icons add">&#xE7FE;</i></div>');
-    });
-});
-// PAGES FUNCTION
-myApp.onPageInit('article', function (page) {
-    $$('.ac-1').on('click', function () {
-        var buttons = [
-            {
-                text: 'Facebook'
-            , }
-            , {
-                text: 'Twitter'
-        }
-            , {
-                text: 'Google Plus'
-        }
-            , {
-                text: 'Cancel'
-                , color: 'red'
-        }
-    , ];
-        myApp.actions(buttons);
     });
 });
 //FUNCTIONS
@@ -443,14 +525,19 @@ function IsJsonString(str) {
 }
 
 function removeVar(target) {
-    if ($$('.variation-show').length == 1){
+    if ($$('.variation-show').length == 1) {
         $$('.variation-hide').show();
+        $$('input[name=variation-price-main]').addClass('required');
     }
     $(target).remove();
     indVar--;
 }
 
 function removeTier(target) {
+    if ($$('.price-tier-row').length == 1) {
+        wholesaleJSON = [];
+        $$('.wholesale-detail').html("");
+    }
     $(target).remove();
     indTier--;
 }
