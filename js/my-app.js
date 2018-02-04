@@ -260,12 +260,12 @@ myApp.onPageInit('home', function (page) {
             $$('.brand-cards').html("");
             $.each(response.data, function (i, v) {
                 if (v.product_count > 0) {
-                    var brandStr = '<div class="card ks-card-header-pic brand-card-row" style="margin-bottom:15px;"> <div class="navbar article"> <div class="navbar-inner opacity-container-top"> <div class="center">' + v.brand_name + '</div> <div class="right"> <a href="#" class="link icon-only"> <i class="material-icons fav">favorite</i> </a> <a href="#" class="link icon-only"> <i class="material-icons">book</i> </a> </div> </div> </div> <div class="header-container" style="margin-top: -53px;"> <a href="brand-page.html?brand-id='+v.brand_id+'"> <div style="background-image:url(img/fleur.jpg)" valign="bottom" class="card-header color-white no-border"></div> </a> </div> <div class="card-footer"> <div class="item-media"><img src="img/gambar2.jpg" width="44" style="margin-top: 5px;"> </div> <div class="item-inner" style="margin-left: 20px;"> <div class="row no-gutter" style="text-align: left;"> <div class="col-100 info" style="text-align: left;font-weight:;font-size: 3vmin;margin-bottom: -10px; color: grey;">Aizal Manan</div> <div class="row" style="padding-top:10px;text-align: left;font-size:1vmin;margin-bottom: 5px;"> <div class="col-10" style="text-align: left;"> <i class="material-icons small-rating">star</i> </div> <div class="col-10" style="text-align: left;"> <i class="material-icons small-rating">star</i> </div> <div class="col-10" style="text-align: left;"> <i class="material-icons small-rating">star</i> </div> <div class="col-10" style="text-align: left;"> <i class="material-icons small-rating">star</i> </div> <div class="col-10" style="text-align: left;"> <i class="material-icons small-unrating">star</i> </div> <div class="col-10" style="text-align: left;"> </div> <div class="col-40" style="text-align: left;"> <div style="font-size: 3vmin;color: grey;line-height: 3vmin;font-weight: lighter;">(Ratings)</div> </div> </div> </div> </div> <div class="icon-social"> <div class="link icon-only" style="color: green; padding-right: 15px; font-size: 4vmin;">' + v.product_count + ' Products</div> </div> </div> </div>';
+                    var brandStr = '<div class="card ks-card-header-pic brand-card-row" style="margin-bottom:15px;"> <div class="navbar article"> <div class="navbar-inner opacity-container-top"> <div class="center">' + v.brand_name + '</div> <div class="right"> <a href="#" class="link icon-only"> <i class="material-icons fav">favorite</i> </a> <a href="#" class="link icon-only"> <i class="material-icons">book</i> </a> </div> </div> </div> <div class="header-container" style="margin-top: -53px;"> <a href="brand-page.html?brand-id=' + v.brand_id + '"> <div style="background-image:url(img/fleur.jpg)" valign="bottom" class="card-header color-white no-border"></div> </a> </div> <div class="card-footer"> <div class="item-media"><img src="img/gambar2.jpg" width="44" style="margin-top: 5px;"> </div> <div class="item-inner" style="margin-left: 20px;"> <div class="row no-gutter" style="text-align: left;"> <div class="col-100 info" style="text-align: left;font-weight:;font-size: 3vmin;margin-bottom: -10px; color: grey;">Aizal Manan</div> <div class="row" style="padding-top:10px;text-align: left;font-size:1vmin;margin-bottom: 5px;"> <div class="col-10" style="text-align: left;"> <i class="material-icons small-rating">star</i> </div> <div class="col-10" style="text-align: left;"> <i class="material-icons small-rating">star</i> </div> <div class="col-10" style="text-align: left;"> <i class="material-icons small-rating">star</i> </div> <div class="col-10" style="text-align: left;"> <i class="material-icons small-rating">star</i> </div> <div class="col-10" style="text-align: left;"> <i class="material-icons small-unrating">star</i> </div> <div class="col-10" style="text-align: left;"> </div> <div class="col-40" style="text-align: left;"> <div style="font-size: 3vmin;color: grey;line-height: 3vmin;font-weight: lighter;">(Ratings)</div> </div> </div> </div> </div> <div class="icon-social"> <div class="link icon-only" style="color: green; padding-right: 15px; font-size: 4vmin;">' + v.product_count + ' Products</div> </div> </div> </div>';
                     $$('.brand-cards').append(brandStr);
                 }
             });
         }
-        if($$('.brand-card-row').length == 0){
+        if ($$('.brand-card-row').length == 0) {
             $$('.brand-title').hide();
         }
     });
@@ -287,6 +287,17 @@ myApp.onPageInit('profile', function (page) {
     });
     $$('.completed').on('click', function () {
         tabClick = "#completed";
+    });
+});
+myApp.onPageInit('network', function (page) {
+    $$('.trigger-actionsheet').on('click', function () {
+        var buttons = [
+            {
+                text: '<a href="#"><i class="icon material-icons" style="margin-right:8px;color:#777;">&#xE8A0;</i>Search User</a>'
+        }, {
+                text: '<a href="#"><i class="icon material-icons" style="margin-right:8px;color:#777;">&#xE7FD;</i>Add Follower</a>'
+        }, ];
+        myApp.actions(buttons);
     });
 });
 myApp.onPageInit('my-purchase', function (page) {
